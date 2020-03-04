@@ -2,15 +2,42 @@ import flask
 app = flask.Flask(__name__)
 
 
-@app.route("/")
-def index():
+@app.route("/", defaults={"path": ""})
+@app.route("/<path:path>")
+def catch_all(path):
     return flask.render_template("index.html", token="Hello Flask+React!")
 
 
-@app.route("/home")
-def home():
-    return "<h1>YOU ARE HOME!</h1>"
+'''
+@app.route("/top-players")
+def top_players():
+    return flask.render_template("top-players.html")
 
+
+@app.route("/statistics")
+def card_statistics():
+    return flask.render_template("card-statistics.html")
+
+
+@app.route("/about")
+def about():
+    return flask.render_template("about.html")
+
+
+@app.route("/card-gallery")
+def card_gallery():
+    return flask.render_template("card-gallery.html")
+
+
+@app.route("/deck-builder")
+def deck_builder():
+    return flask.render_template("deck-builder.html")
+
+
+@app.route("/deck-library")
+def deck_library():
+    return flask.render_template("deck-library.html")
+'''
 
 if __name__ == "__main__":
     app.config.from_object('configurations.DevelopmentConfig')
