@@ -38,11 +38,13 @@ class Hamburger extends React.Component {
 
     render() {
         return(
-            <div onClick={this.handleClick}>
+            <div>
                 <NavBar className={this.state.isOpen ? "show" : "hidden"}/>
-                <div className={this.setAnimations("top")}/>
-                <div className={this.setAnimations("mid")}/>
-                <div className={this.setAnimations("bot")}/>
+                <div onClick={this.handleClick}>
+                    <div className={this.setAnimations("top")}/>
+                    <div className={this.setAnimations("mid")}/>
+                    <div className={this.setAnimations("bot")}/>
+                </div>
             </div>
         );
     }

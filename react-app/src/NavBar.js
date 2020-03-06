@@ -27,7 +27,6 @@ class NavBar extends React.Component {
 
     render() {
         return (
-            <Router>
                 <div className={this.props.className}>
                     <ul>
                         <li>
@@ -52,18 +51,8 @@ class NavBar extends React.Component {
                             <NavLink to="/about">About</NavLink>
                         </li>
                     </ul>
-                    <Switch>
-                        <Route exact path="/" component={App} />
-                        <Route path="/top-players" component={TopPlayers} />
-                        <Route path="/statistics" component={CardStatistics} />
-                        <Route path="/card-gallery" component={CardGallery} />
-                        <Route path="/deck-builder" component={DeckBuilder} />
-                        <Route path="/deck-library" component={DeckLibrary} />
-                        <Route path="/about" component={About} />
-                        <Route component={NotFound} />
-                    </Switch>
+
                 </div>
-            </Router>
         );
     }
 }

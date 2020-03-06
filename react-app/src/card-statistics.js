@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Hamburger from './Hamburger';
 
 class CardStatistics extends React.Component {
     render() {
