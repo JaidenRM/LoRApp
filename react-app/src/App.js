@@ -1,6 +1,7 @@
 import React from 'react';
 import NavBar from './NavBar';
 import Hamburger from './Hamburger';
+import Home from './home';
 import TopPlayers from './top-players';
 import CardStatistics from './card-statistics';
 import CardGallery from './card-gallery';
@@ -23,7 +24,7 @@ class App extends React.Component {
             <Router>
                 <Hamburger/>
                 <Switch>
-                    <Route exact path="/" render={() => <h1>Home</h1>} />
+                    <Route exact path="/" component={Home} />
                     <Route path="/top-players" component={TopPlayers} />
                     <Route path="/statistics" component={CardStatistics} />
                     <Route path="/card-gallery" component={CardGallery} />

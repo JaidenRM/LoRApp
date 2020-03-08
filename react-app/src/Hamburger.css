@@ -3,6 +3,7 @@
     height: 0.5rem;
     border-top: .5rem solid black;
     border-radius: .5rem;
+    margin: 0.5rem 0;
 }
 
 .top-line-animate {
@@ -15,6 +16,7 @@
     animation-name: spin-45-left-reverse;
     animation-duration: 1.5s;
     animation-fill-mode: forwards;
+    margin: 0.5rem 0;
 }
 
 .mid-line {
@@ -23,6 +25,7 @@
     border-top: .25rem solid black;
     border-bottom: .25rem solid black;
     border-radius: .5rem;
+    margin: 0.5rem 0;
 }
 
 .mid-line-animate {
@@ -35,6 +38,7 @@
     animation-name: disappear-left-reverse;
     animation-duration: 1.5s;
     animation-fill-mode: forwards;
+    margin: 0.5rem 0;
 }
 
 .bot-line {
@@ -42,6 +46,7 @@
     height: 0.5rem;
     border-bottom: .5rem solid black;
     border-radius: .5rem;
+    margin: 0.5rem 0;
 }
 
 .bot-line-animate {
@@ -53,19 +58,20 @@
     animation-name: spin-45-right-reverse;
     animation-duration: 1.5s;
     animation-fill-mode: forwards;
+    margin: 0.5rem 0;
 }
 
 @-moz-keyframes spin-45-right {
     from {-moz-transform:rotate(0deg) translateY(0);}
-    to {-moz-transform:rotate(45deg) translateY(-125%);}
+    to {-moz-transform:rotate(45deg) translateY(-125%);margin: 0;}
 }
 @-webkit-keyframes spin-45-right {
     from {-webkit-transform:rotate(0deg) translateY(0);}
-    to {-webkit-transform:rotate(45deg) translateY(-125%);}
+    to {-webkit-transform:rotate(45deg) translateY(-125%);margin: 0;}
 }
 @keyframes spin-45-right {
     from {transform:rotate(0deg) translateY(0);}
-    to {transform:rotate(45deg) translateY(-125%);}
+    to {transform:rotate(45deg) translateY(-125%);margin: 0;}
 }
 
 @-moz-keyframes spin-45-right-reverse {
@@ -83,15 +89,15 @@
 
 @-moz-keyframes spin-45-left {
     from {-moz-transform:rotate(0deg) translateY(0);}
-    to {-moz-transform:rotate(-45deg) translateY(125%);}
+    to {-moz-transform:rotate(-45deg) translateY(125%);margin: 0;}
 }
 @-webkit-keyframes spin-45-left {
     from {-webkit-transform:rotate(0deg) translate(0);}
-    to {-webkit-transform:rotate(-45deg) translate(125%);}
+    to {-webkit-transform:rotate(-45deg) translate(125%);margin: 0;}
 }
 @keyframes spin-45-left {
     from {transform:rotate(0deg) translateY(0);}
-    to {transform:rotate(-45deg) translateY(125%);}
+    to {transform:rotate(-45deg) translateY(125%);margin: 0;}
 }
 
 @-moz-keyframes spin-45-left-reverse {
@@ -115,6 +121,7 @@
     100% {
         opacity: 0;
         -moz-transform:translateX(-3rem);
+        margin: 0;
     }
 }
 @-webkit-keyframes disappear-left {
@@ -125,6 +132,7 @@
     100% {
         opacity: 0;
         -webkit-transform:translateX(-3rem);
+        margin: 0;
     }
 }
 @keyframes disappear-left {
@@ -135,6 +143,7 @@
     100% {
         opacity: 0;
         transform:translateX(-3rem);
+        margin: 0;
     }
 }
 
