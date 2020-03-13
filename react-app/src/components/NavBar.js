@@ -1,15 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './NavBar.css';
-import App from './App';
-import TopPlayers from './top-players';
-import CardStatistics from './card-statistics';
-import CardGallery from './card-gallery';
-import DeckBuilder from './deck-builder';
-import DeckLibrary from './deck-library';
-import About from './about';
-import NotFound from './not-found';
-import Index from './index';
+import '../css/NavBar.css';
+import TopPlayers from '../pages/top-players';
+import CardStatistics from '../pages/card-statistics';
+import CardGallery from '../pages/card-gallery';
+import DeckBuilder from '../pages/deck-builder';
+import DeckLibrary from '../pages/deck-library';
+import About from '../pages/about';
+import NotFound from '../pages/not-found';
 import {
     BrowserRouter as Router,
     Switch,

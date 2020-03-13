@@ -1,6 +1,6 @@
 import React from 'react';
-import './Hamburger.css'
-import NavBar from './NavBar';
+import '../css/Hamburger.css'
+import NavBar from '../components/NavBar';
 
 class Hamburger extends React.Component {
 

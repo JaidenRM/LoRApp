@@ -1,14 +1,14 @@
 import React from 'react';
-import NavBar from './NavBar';
-import Hamburger from './Hamburger';
-import Home from './home';
-import TopPlayers from './top-players';
-import CardStatistics from './card-statistics';
-import CardGallery from './card-gallery';
-import DeckBuilder from './deck-builder';
-import DeckLibrary from './deck-library';
-import About from './about';
-import NotFound from './not-found';
+import NavBar from './components/NavBar';
+import Hamburger from './components/Hamburger';
+import Home from './pages/home';
+import TopPlayers from './pages/top-players';
+import CardStatistics from './pages/card-statistics';
+import CardGallery from './pages/card-gallery';
+import DeckBuilder from './pages/deck-builder';
+import DeckLibrary from './pages/deck-library';
+import About from './pages/about';
+import NotFound from './pages/not-found';
 import {
     BrowserRouter as Router,
     Switch,

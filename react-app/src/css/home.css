@@ -1,0 +1,12 @@
+.jumbotron {
+    background-image: url("../images/Legends-of-Runeterra.jpg");
+    height: 100%;
+}
+
+section {
+    height: 100vh;
+}
+
+.section-first {
+    height: 90vh;
+}
