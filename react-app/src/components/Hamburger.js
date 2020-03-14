@@ -38,7 +38,7 @@ class Hamburger extends React.Component {
     render() {
         return(
             <div>
-                <NavBar className={this.state.isOpen ? "show" : "hidden"}/>
+                <NavBar className={this.state.isOpen ? "show" : "hidden"} layout={"mobddile"}/>
                 <div onClick={this.handleClick}>
                     <div className={this.setAnimations("top")}/>
                     <div className={this.setAnimations("mid")}/>

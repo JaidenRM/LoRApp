@@ -43,7 +43,8 @@ class Heading extends React.Component {
 }
 
 Heading.propTypes = {
-    text: PropTypes.string
+    text: PropTypes.string,
+    textStyle: PropTypes.string
 };
 
 export default Heading;
