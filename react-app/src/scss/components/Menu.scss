@@ -1,65 +1,73 @@
-.top-line {
-    width: 3rem;
-    height: 0.5rem;
-    border-top: .5rem solid black;
-    border-radius: .5rem;
-    margin: 0.5rem 0;
+.mobile-layout {
+    .hamburger {
+        .top-line {
+            width: 3rem;
+            height: 0.5rem;
+            border-top: .5rem solid black;
+            border-radius: .5rem;
+            margin: 0.5rem 0;
+
+            &-animate {
+                animation-name: spin-45-left;
+                animation-duration: 1.5s;
+                animation-fill-mode: forwards;
+
+                &-reverse {
+                    animation-name: spin-45-left-reverse;
+                    animation-duration: 1.5s;
+                    animation-fill-mode: forwards;
+                    margin: 0.5rem 0;
+                }
+            }
+        }
+
+        .mid-line {
+            width: 3rem;
+            height: 0px;
+            border-top: .25rem solid black;
+            border-bottom: .25rem solid black;
+            border-radius: .5rem;
+            margin: 0.5rem 0;
+
+            &-animate {
+                animation-name: disappear-left;
+                animation-duration: 1.5s;
+                animation-fill-mode: forwards;
+
+                &-reverse {
+                    animation-name: disappear-left-reverse;
+                    animation-duration: 1.5s;
+                    animation-fill-mode: forwards;
+                    margin: 0.5rem 0;
+                }
+            }
+        }
+
+        .bot-line {
+            width: 3rem;
+            height: 0.5rem;
+            border-bottom: .5rem solid black;
+            border-radius: .5rem;
+            margin: 0.5rem 0;
+
+            &-animate {
+                animation-name: spin-45-right;
+                animation-duration: 1.5s;
+                animation-fill-mode: forwards;
+
+                &-reverse {
+                    animation-name: spin-45-right-reverse;
+                    animation-duration: 1.5s;
+                    animation-fill-mode: forwards;
+                    margin: 0.5rem 0;
+                }
+            }
+        }
+    }
 }
 
-.top-line-animate {
-    animation-name: spin-45-left;
-    animation-duration: 1.5s;
-    animation-fill-mode: forwards;
-}
 
-.top-line-animate-reverse {
-    animation-name: spin-45-left-reverse;
-    animation-duration: 1.5s;
-    animation-fill-mode: forwards;
-    margin: 0.5rem 0;
-}
 
-.mid-line {
-    width: 3rem;
-    height: 0px;
-    border-top: .25rem solid black;
-    border-bottom: .25rem solid black;
-    border-radius: .5rem;
-    margin: 0.5rem 0;
-}
-
-.mid-line-animate {
-    animation-name: disappear-left;
-    animation-duration: 1.5s;
-    animation-fill-mode: forwards;
-}
-
-.mid-line-animate-reverse {
-    animation-name: disappear-left-reverse;
-    animation-duration: 1.5s;
-    animation-fill-mode: forwards;
-    margin: 0.5rem 0;
-}
-
-.bot-line {
-    width: 3rem;
-    height: 0.5rem;
-    border-bottom: .5rem solid black;
-    border-radius: .5rem;
-    margin: 0.5rem 0;
-}
-
-.bot-line-animate {
-    animation-name: spin-45-right;
-    animation-duration: 1.5s;
-    animation-fill-mode: forwards;
-}
-.bot-line-animate-reverse {
-    animation-name: spin-45-right-reverse;
-    animation-duration: 1.5s;
-    animation-fill-mode: forwards;
-    margin: 0.5rem 0;
-}
 
 @-moz-keyframes spin-45-right {
     from {-moz-transform:rotate(0deg) translateY(0);}

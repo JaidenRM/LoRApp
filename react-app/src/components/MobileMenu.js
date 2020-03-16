@@ -1,8 +1,7 @@
 import React from 'react';
-import '../css/Hamburger.css'
 import NavBar from '../components/NavBar';
 
-class Hamburger extends React.Component {
+class MobileMenu extends React.Component {
 
     constructor(props) {
         super(props);
@@ -35,11 +34,12 @@ class Hamburger extends React.Component {
         return cName;
     }
 
+
     render() {
         return(
-            <div>
-                <NavBar className={this.state.isOpen ? "show" : "hidden"} layout={"mobddile"}/>
-                <div onClick={this.handleClick}>
+            <div className={this.props.className}>
+                <NavBar className={`nav ${this.state.isOpen ? "show" : "hidden"}`} layout={"mobile"}/>
+                <div onClick={this.handleClick} className="hamburger">
                     <div className={this.setAnimations("top")}/>
                     <div className={this.setAnimations("mid")}/>
                     <div className={this.setAnimations("bot")}/>
@@ -49,4 +49,4 @@ class Hamburger extends React.Component {
     }
 }
 
-export default Hamburger;
+export default MobileMenu;

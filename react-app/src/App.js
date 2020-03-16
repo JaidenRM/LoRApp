@@ -1,6 +1,6 @@
 import React from 'react';
 import NavBar from './components/NavBar';
-import Hamburger from './components/Hamburger';
+import Menu from './components/Menu';
 import {
     pathIds, pageRoutes
 } from './routes';
@@ -17,7 +17,7 @@ class App extends React.Component {
     render() {
         return(
             <Router>
-                <Hamburger/>
+                <Menu/>
                 <Switch>
                     {
                         Object.values(pageRoutes)
