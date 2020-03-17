@@ -1,9 +1,8 @@
 import React from 'react';
-import NavBar from './components/NavBar';
 import Menu from './components/Menu';
 import {
     pathIds, pageRoutes
-} from './routes';
+} from './routes.tsx';
 import {
     BrowserRouter as Router,
     Switch,

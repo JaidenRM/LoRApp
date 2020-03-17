@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import '../css/NavBar.css';
 import {
     BrowserRouter as Router,
@@ -13,7 +12,7 @@ import {
 } from 'reactstrap';
 import {
     pageRoutes
-} from '../routes';
+} from '../routes.tsx';
 import PropTypes from 'prop-types';
 
 class NavBar extends React.Component {
