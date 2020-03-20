@@ -8,10 +8,11 @@ import PropTypes from 'prop-types';
 NavBar.propTypes = {
     layout: PropTypes.string
 }
+
 const NavBar = (props) => {
 
     return (
-        <Container className={props.className}>
+        <Container className={props.className} fluid>
             {getLayout()}
         </Container>
     );

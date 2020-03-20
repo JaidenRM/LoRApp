@@ -1,2 +1,6 @@
-@import './_variables.scss';
-@import './components/Menu.scss';
+//important to import first as many files reference these
+@import './_variables';
+@import './animations';
+
+//pages
+@import './components/Menu';
