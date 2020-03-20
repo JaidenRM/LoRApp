@@ -4,10 +4,25 @@ import {
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 
+Heading.propTypes = {
+    text: PropTypes.string,
+    textStyle: PropTypes.string
+};
 
-class Heading extends React.Component {
+const Heading = (props) => {
+    
+    switch(props.textStyle) {
+        case "acronym":
+            let words = props.text.split(" ");
+            return words.map((word) =>
+                mapToStyle(word, props.textStyle)
+            );
+        default:
+            return <h1>{props.text}</h1>
+    }
 
-    mapToStyle(word, style) {
+    //creates a heading based on the selected style
+    function mapToStyle(word, style) {
         switch(style) {
             case "acronym":
                 return (
@@ -26,25 +41,6 @@ class Heading extends React.Component {
                 return <h1>{word[0].toUpperCase() + word.substring(1)}</h1>
         }
     }
-
-    render() {
-        switch(this.props.textStyle) {
-            case "acronym":
-                let words = this.props.text.split(" ");
-                return words.map((word) =>
-                    this.mapToStyle(word, this.props.textStyle)
-                );
-            default:
-                return <h1>{this.props.text}</h1>
-        }
-
-    }
-
 }
-
-Heading.propTypes = {
-    text: PropTypes.string,
-    textStyle: PropTypes.string
-};
 
 export default Heading;

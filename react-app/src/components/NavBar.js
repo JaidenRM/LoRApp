@@ -1,32 +1,27 @@
 import React from 'react';
 import '../css/NavBar.css';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    NavLink
-} from 'react-router-dom';
-import {
-    Container, Row, Col
-} from 'reactstrap';
-import {
-    pageRoutes
-} from '../routes.tsx';
+import { NavLink } from 'react-router-dom';
+import { Container, Row, Col } from 'reactstrap';
+import { pageRoutes } from '../routes.tsx';
 import PropTypes from 'prop-types';
 
-class NavBar extends React.Component {
+NavBar.propTypes = {
+    layout: PropTypes.string
+}
+const NavBar = (props) => {
 
-    constructor(props) {
-        super(props)
-    }
-
-    getLayout() {
-        switch(this.props.layout) {
+    return (
+        <Container className={props.className}>
+            {getLayout()}
+        </Container>
+    );
+    
+    function getLayout() {
+        switch(props.layout) {
             case "mobile":
                 return (
                     Object.values(pageRoutes)
-                          .map((prop, key) => {
+                        .map((prop, key) => {
                         if(prop.noRender) return null;
                         return(
                             <Row>
@@ -40,7 +35,7 @@ class NavBar extends React.Component {
                 return (
                     <Row>
                         {Object.values(pageRoutes)
-                          .map((prop, key) => {
+                        .map((prop, key) => {
                             if(prop.noRender) return null;
                             return(
                                 <Col>
@@ -53,18 +48,8 @@ class NavBar extends React.Component {
                 )
         }
     }
-
-    render() {
-        return (
-            <Container className={this.props.className}>
-                {this.getLayout()}
-            </Container>
-        );
-    }
 }
 
-NavBar.propTypes = {
-    layout: PropTypes.string
-}
+
 
 export default NavBar;

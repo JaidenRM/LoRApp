@@ -1,11 +1,9 @@
 import React from 'react';
 import NavBar from '../components/NavBar';
 
-class DesktopMenu extends React.Component {
+const DesktopMenu = (props) => {
 
-    render() {
-        return <NavBar className={`nav ${this.props.className}`}/>
-    }
+    return <NavBar className={`nav ${props.className}`}/>
 }
 
 export default DesktopMenu;

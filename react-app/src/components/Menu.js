@@ -1,39 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import MobileMenu from '../components/MobileMenu';
 import DesktopMenu from '../components/DesktopMenu';
 
-class Menu extends React.Component {
+const Menu = (props) => {
 
-    constructor() {
-        super();
-        this.state = {
-            screenWidth: window.innerWidth
-        };
-        this.getWindowWith = this.getWindowWidth.bind(this);
-    }
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    useEffect(() => {
+        const resizeHandler = () => setScreenWidth(window.innerWidth);
+        window.addEventListener("resize", resizeHandler);
 
-    componentDidMount() {
-        window.addEventListener("resize", this.getWindowWidth.bind(this));
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener("resize", this.getWindowWidth.bind(this));
-    }
-
-    getWindowWidth() {
-        this.setState({
-            screenWidth: window.innerWidth
-        });
-    }
+        return () => {
+            window.removeEventListener("resize", resizeHandler);
+        }
+    }, [screenWidth]);
 
     //work out states and logic for when to show hamburger vs no hamburger
-    render() {
-        console.log(this.state.screenWidth);
-        if(this.state.screenWidth < 760)
-            return <MobileMenu className="mobile-layout"/>
+    //console.log(screenWidth);
+    if(screenWidth < 760)
+        return <MobileMenu className="mobile-layout"/>
 
-        return <DesktopMenu className="desktop-layout"/>
-    }
+    return <DesktopMenu className="desktop-layout"/>
 }
 
 export default Menu;

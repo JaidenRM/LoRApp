@@ -1,51 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import NavBar from '../components/NavBar';
 
-class MobileMenu extends React.Component {
+const MobileMenu = (props) => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            isOpen: false,
-            isFirstTime: true
-        };
+    const [isOpen, setOpen] = useState(false);
+    const [isFirstTime, setFirstTime] = useState(true);
 
-        //The binding enables `this` to work in the callback
-        this.handleClick = this.handleClick.bind(this);
+    return(
+        <div className={props.className}>
+            <NavBar className={`nav ${isOpen ? "show" : "hidden"}`} layout={"mobile"}/>
+            <div onClick={handleClick} className="hamburger">
+                <div className={setAnimations("top")}/>
+                <div className={setAnimations("mid")}/>
+                <div className={setAnimations("bot")}/>
+            </div>
+        </div>
+    );
+
+    function handleClick() {
+        setOpen(prev => !prev);
+        setFirstTime(false);
     }
 
-    handleClick() {
-        this.setState(state => ({
-            isOpen: !state.isOpen,
-            isFirstTime: false
-        }));
-    }
-
-    setAnimations(cName) {
+    function setAnimations(cName) {
         cName += "-line";
-        if(this.state.isFirstTime)
+        if(isFirstTime)
             return cName;
 
         cName += (" " + cName + "-animate");
 
-        if(!this.state.isOpen)
+        if(!isOpen)
             cName += "-reverse";
 
         return cName;
-    }
-
-
-    render() {
-        return(
-            <div className={this.props.className}>
-                <NavBar className={`nav ${this.state.isOpen ? "show" : "hidden"}`} layout={"mobile"}/>
-                <div onClick={this.handleClick} className="hamburger">
-                    <div className={this.setAnimations("top")}/>
-                    <div className={this.setAnimations("mid")}/>
-                    <div className={this.setAnimations("bot")}/>
-                </div>
-            </div>
-        );
     }
 }
 
