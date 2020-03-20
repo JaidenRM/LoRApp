@@ -24,8 +24,8 @@ const NavBar = (props) => {
                         .map((prop, key) => {
                         if(prop.noRender) return null;
                         return(
-                            <Row>
-                                <NavLink to={prop.path}>
+                            <Row className="mobile-row">
+                                <NavLink to={prop.path} className="mobile-navlink">
                                     {prop.displayName}
                                 </NavLink>
                             </Row>
