@@ -16,7 +16,7 @@ class App extends React.Component {
     render() {
         return(
             <Router>
-                <Menu/>
+                <Menu className="nav menu"/>
                 <Switch>
                     {
                         Object.values(pageRoutes)

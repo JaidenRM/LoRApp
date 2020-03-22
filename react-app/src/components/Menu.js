@@ -17,9 +17,9 @@ const Menu = (props) => {
     //work out states and logic for when to show hamburger vs no hamburger
     //console.log(screenWidth);
     if(screenWidth < 760)
-        return <MobileMenu className="mobile-layout"/>
+        return <MobileMenu className={`${props.className} layout-mobile`}/>
 
-    return <DesktopMenu className="desktop-layout"/>
+    return <DesktopMenu className={`${props.className} layout-desktop`}/>
 }
 
 export default Menu;

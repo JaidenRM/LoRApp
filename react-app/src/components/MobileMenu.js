@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Row, Col } from 'reactstrap';
 import NavBar from '../components/NavBar';
 
 const MobileMenu = (props) => {
@@ -7,14 +8,14 @@ const MobileMenu = (props) => {
     const [isFirstTime, setFirstTime] = useState(true);
 
     return(
-        <div className={`nav ${props.className}`}>
+        <Row className={props.className}>
             <NavBar className={isOpen ? "show" : "hidden"} layout={"mobile"}/>
-            <div onClick={handleClick} className="hamburger">
-                <div className={setAnimations("top")}/>
-                <div className={setAnimations("mid")}/>
-                <div className={setAnimations("bot")}/>
-            </div>
-        </div>
+            <Col onClick={handleClick} className="hamburger" xs="auto">
+                <Row className={setAnimations("top")}/>
+                <Row className={setAnimations("mid")}/>
+                <Row className={setAnimations("bot")}/>
+            </Col>
+        </Row>
     );
 
     function handleClick() {

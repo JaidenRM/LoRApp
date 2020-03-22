@@ -25,8 +25,8 @@ const NavBar = (props) => {
                         .map((prop, key) => {
                         if(prop.noRender) return null;
                         return(
-                            <Row className="mobile-row">
-                                <NavLink to={prop.path} className="mobile-navlink">
+                            <Row className="navrow-mobile">
+                                <NavLink to={prop.path} className="navlink-mobile">
                                     {prop.displayName}
                                 </NavLink>
                             </Row>
@@ -34,13 +34,13 @@ const NavBar = (props) => {
                 )
             default:
                 return (
-                    <Row>
+                    <Row className="navrow-desktop">
                         {Object.values(pageRoutes)
                         .map((prop, key) => {
                             if(prop.noRender) return null;
                             return(
                                 <Col>
-                                    <NavLink to={prop.path}>
+                                    <NavLink to={prop.path} className="navlink-desktop">
                                         {prop.displayName}
                                     </NavLink>
                                 </Col>

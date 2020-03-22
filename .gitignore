@@ -27,7 +27,6 @@ yarn-error.log*
 /env/
 
 **/__pycache__
-/.vscode
 
 /flask-backend/*
 !/flask-backend/*.py

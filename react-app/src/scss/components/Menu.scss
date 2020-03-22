@@ -1,95 +1,105 @@
-.mobile-layout {
-    background-color: $secondary-col;
+.menu {
 
-    .hamburger {
-        margin-left: 0.5rem;
+    &.layout {
 
-        .top-line {
-            width: 3rem;
-            height: 0.5rem;
-            border-top: .5rem solid $primary-col;
-            border-radius: .5rem;
-            margin: 0.5rem 0;
-
-            &-animate {
-                border-color: $tertiary-col;
-                animation-name: spin-45-left;
-                animation-duration: 1.5s;
-                animation-fill-mode: forwards;
-
-                &-reverse {
-                    animation-name: spin-45-left-reverse;
-                    animation-duration: 1.5s;
-                    animation-fill-mode: forwards;
+        &-mobile {
+            background-color: $secondary-col;
+    
+            .hamburger {
+                margin-left: 0.5rem;
+    
+                &:hover {
+                    cursor: pointer;
+                }
+    
+                .top-line {
+                    width: 3rem;
+                    height: 0.5rem;
+                    border-top: .5rem solid $primary-col;
+                    border-radius: .5rem;
                     margin: 0.5rem 0;
+    
+                    &-animate {
+                        border-color: $tertiary-col;
+                        animation-name: spin-45-left;
+                        animation-duration: 1.5s;
+                        animation-fill-mode: forwards;
+    
+                        &-reverse {
+                            animation-name: spin-45-left-reverse;
+                            animation-duration: 1.5s;
+                            animation-fill-mode: forwards;
+                            margin: 0.5rem 0;
+                        }
+                    }
+                }
+    
+                .mid-line {
+                    width: 3rem;
+                    height: 0px;
+                    border-top: .25rem solid $primary-col;
+                    border-bottom: .25rem solid $primary-col;
+                    border-radius: .5rem;
+                    margin: 0.5rem 0;
+    
+                    &-animate {
+                        border-color: $tertiary-col;
+                        animation-name: disappear-left;
+                        animation-duration: 1.5s;
+                        animation-fill-mode: forwards;
+    
+                        &-reverse {
+                            animation-name: disappear-left-reverse;
+                            animation-duration: 1.5s;
+                            animation-fill-mode: forwards;
+                            margin: 0.5rem 0;
+                        }
+                    }
+                }
+    
+                .bot-line {
+                    width: 3rem;
+                    height: 0.5rem;
+                    border-bottom: .5rem solid $primary-col;
+                    border-radius: .5rem;
+                    margin: 0.5rem 0;
+    
+                    &-animate {
+                        border-color: $tertiary-col;
+                        animation-name: spin-45-right;
+                        animation-duration: 1.5s;
+                        animation-fill-mode: forwards;
+    
+                        &-reverse {
+                            animation-name: spin-45-right-reverse;
+                            animation-duration: 1.5s;
+                            animation-fill-mode: forwards;
+                            margin: 0.5rem 0;
+                        }
+                    }
                 }
             }
-        }
-
-        .mid-line {
-            width: 3rem;
-            height: 0px;
-            border-top: .25rem solid $primary-col;
-            border-bottom: .25rem solid $primary-col;
-            border-radius: .5rem;
-            margin: 0.5rem 0;
-
-            &-animate {
-                border-color: $tertiary-col;
-                animation-name: disappear-left;
-                animation-duration: 1.5s;
-                animation-fill-mode: forwards;
-
-                &-reverse {
-                    animation-name: disappear-left-reverse;
-                    animation-duration: 1.5s;
-                    animation-fill-mode: forwards;
-                    margin: 0.5rem 0;
+    
+            .navrow-mobile {
+                margin: 0.5rem auto;
+                border-bottom: 0.15rem solid $tertiary-col;
+    
+                &:last-child {
+                    border-bottom: none;
                 }
-            }
-        }
-
-        .bot-line {
-            width: 3rem;
-            height: 0.5rem;
-            border-bottom: .5rem solid $primary-col;
-            border-radius: .5rem;
-            margin: 0.5rem 0;
-
-            &-animate {
-                border-color: $tertiary-col;
-                animation-name: spin-45-right;
-                animation-duration: 1.5s;
-                animation-fill-mode: forwards;
-
-                &-reverse {
-                    animation-name: spin-45-right-reverse;
-                    animation-duration: 1.5s;
-                    animation-fill-mode: forwards;
-                    margin: 0.5rem 0;
+    
+                .navlink-mobile {
+                    text-decoration: none;
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                    color: $primary-col;
+                    margin: 0 auto;
+    
+                    &:hover {
+                        cursor: pointer;
+                        color: $tertiary-col;
+                    }
                 }
-            }
-        }
-    }
-
-    .mobile-row {
-        margin: 0.5rem auto;
-        border-bottom: 0.15rem solid $tertiary-col;
-
-        &:last-child {
-            border-bottom: none;
-        }
-
-        .mobile-navlink {
-            text-decoration: none;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: $primary-col;
-            margin: 0 auto;
-
-            &:hover {
-                cursor: pointer;
-                color: $tertiary-col;
             }
         }
     }
