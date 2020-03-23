@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import MobileMenu from '../components/MobileMenu';
-import DesktopMenu from '../components/DesktopMenu';
+import MobileMenu from './MobileMenu';
+import DesktopMenu from './DesktopMenu';
+import _variables from '../scss/_variables.scss';
 
 const Menu = (props) => {
 
@@ -16,10 +17,10 @@ const Menu = (props) => {
 
     //work out states and logic for when to show hamburger vs no hamburger
     //console.log(screenWidth);
-    if(screenWidth < 760)
-        return <MobileMenu className={`${props.className} layout-mobile`}/>
+    if(screenWidth < parseInt(_variables.md))
+        return <MobileMenu className={`${props.className} layout`}/>
 
-    return <DesktopMenu className={`${props.className} layout-desktop`}/>
+    return <DesktopMenu className={`${props.className} layout`}/>
 }
 
 export default Menu;

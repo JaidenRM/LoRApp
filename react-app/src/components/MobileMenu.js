@@ -9,7 +9,7 @@ const MobileMenu = (props) => {
 
     return(
         <Row className={props.className}>
-            <NavBar className={isOpen ? "show" : "hidden"} layout={"mobile"}/>
+            <NavBar className={`${isOpen ? "show" : "hidden"} layout-1`} layout={"mobile"}/>
             <Col onClick={handleClick} className="hamburger" xs="auto">
                 <Row className={setAnimations("top")}/>
                 <Row className={setAnimations("mid")}/>
