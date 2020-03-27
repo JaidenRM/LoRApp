@@ -1,4 +1,4 @@
-.layout {
+.menu-layout {
     background-color: $secondary-col;
     position: fixed;
     top: 0;
@@ -7,6 +7,8 @@
 
     .hamburger {
         margin-left: 0.5rem;
+        height: $xs-menu-height;
+        padding-top: 0.2rem;
 
         &:hover {
             cursor: pointer;
@@ -79,6 +81,20 @@
             }
         }
     }
+    
+    .hidden {
+        margin: 0;
+        opacity: 0;
+        max-height: 0;
+        transition: all 1.5s ease-in-out;
+        pointer-events: none;
+    }
+    
+    .show {
+        opacity: 1;
+        max-height: 2000px;
+        transition: all 1.5s ease-in-out;
+    }
 
     .navrow {
         margin: 0.5rem auto;
@@ -86,7 +102,7 @@
 
         @include responsive($bp-md) {
             //width: 100%;
-            min-height: 4rem;
+            min-height: $xs-menu-height;
             text-align: center;
         }
 

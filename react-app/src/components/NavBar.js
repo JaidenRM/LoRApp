@@ -1,5 +1,4 @@
 import React from 'react';
-import '../css/NavBar.css';
 import { NavLink } from 'react-router-dom';
 import { Container, Row, Col } from 'reactstrap';
 import { pageRoutes } from '../routes.tsx';

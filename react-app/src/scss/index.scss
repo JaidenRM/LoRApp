@@ -3,5 +3,12 @@
 @import './_mixins';
 @import './_animations';
 
-//pages
+//components
 @import './components/Menu';
+@import './components/ScrollTo';
+
+//styling to base elements of a html file, i.e. <Body>
+@import './base';
+
+//pages
+@import './pages/home';

@@ -8,8 +8,8 @@ const MobileMenu = (props) => {
     const [isFirstTime, setFirstTime] = useState(true);
 
     return(
-        <Row className={props.className}>
-            <NavBar className={`${isOpen ? "show" : "hidden"} layout-1`} layout={"mobile"}/>
+        <Row className={props.className} fluid>
+            <NavBar className={isOpen ? "show" : "hidden"} layout={"mobile"}/>
             <Col onClick={handleClick} className="hamburger" xs="auto">
                 <Row className={setAnimations("top")}/>
                 <Row className={setAnimations("mid")}/>

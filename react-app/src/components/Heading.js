@@ -14,11 +14,16 @@ const Heading = (props) => {
     switch(props.textStyle) {
         case "acronym":
             let words = props.text.split(" ");
-            return words.map((word) =>
-                mapToStyle(word, props.textStyle)
+            return (
+                <Row className={`heading ${props.className}`}>
+                {
+                    words.map((word) =>
+                    mapToStyle(word, props.textStyle))
+                }
+                </Row>
             );
         default:
-            return <h1>{props.text}</h1>
+            return <h1 className={`${props.className} heading`}>{props.text}</h1>
     }
 
     //creates a heading based on the selected style
