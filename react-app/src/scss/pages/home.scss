@@ -1,0 +1,35 @@
+.home {
+    section {
+        min-height: calc(100vh - #{$xs-menu-height} - 0.5rem);
+        width: 100%;
+        border: 2px solid $tertiary-col;
+        background-color: $primary-col;
+        margin-bottom: 0.5rem; 
+
+        .jumbotron {
+            height: 100vh;
+            background-color: $primary-col;
+            margin: 0;
+        }
+    }
+
+    .section-first {
+        margin-top: $xs-menu-height;
+        
+        .jumbotron {
+            background-image: url("../../images/Legends-of-Runeterra.jpg");
+            background-size: cover;
+            
+            .heading {
+                color: $background-col;
+                @include responsive($bp-md) {
+                    display: block;
+                    
+                    &-website {
+                        color: black;
+                    }
+                } 
+            }
+        }
+    }
+}

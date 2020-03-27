@@ -1,0 +1,14 @@
+//important to import first as many files reference these
+@import './_variables';
+@import './_mixins';
+@import './_animations';
+
+//components
+@import './components/Menu';
+@import './components/ScrollTo';
+
+//styling to base elements of a html file, i.e. <Body>
+@import './base';
+
+//pages
+@import './pages/home';

@@ -1,0 +1,35 @@
+//text
+$font: sans-serif;
+
+//colors
+$primary-col: #732DD0;
+$secondary-col: #18A4E7;
+$tertiary-col: #de7119;
+$background-col: #ececec;
+
+//z-indexes
+$z-menu: 2000;
+
+//constants
+$xs-menu-height: 4rem;
+
+//screen size breakpoints
+/* Extra small devices (phones, 600px and less) */
+$bp-xs: 0px;
+/* Small devices (portrait tablets and large phones, 600px and up) */
+$bp-sm: 600;
+/* Medium devices (landscape tablets, 768px and up) */
+$bp-md: 768px;
+/* Large devices (laptops/desktops, 992px and up) */
+$bp-lg: 992px;
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+$bp-xl: 1200px;
+
+//doesnt like dashes (-) in names when importing into JSX
+:export {
+    xs: $bp-xs;
+    sm: $bp-sm;
+    md: $bp-md;
+    lg: $bp-lg;
+    xl: $bp-xl;
+}

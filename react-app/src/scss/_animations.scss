@@ -1,0 +1,55 @@
+@include keyframes(spin-45-right) {
+    from {transform:rotate(0deg) translateY(0);}
+    to {transform:rotate(45deg) translateY(-125%);margin: 0;}
+}
+
+@include keyframes(spin-45-right-reverse) {
+    from {transform:rotate(45deg) translateY(-125%); border-color: $secondary-col;}
+    to {transform:rotate(0deg) translateY(0); border-color: $primary-col;}
+}
+
+@include keyframes(spin-45-left) {
+    from {transform:rotate(0deg) translateY(0);}
+    to {transform:rotate(-45deg) translateY(125%);margin: 0;}
+}
+
+@include keyframes(spin-45-left-reverse) {
+    from {transform:rotate(-45deg) translateY(125%); border-color: $secondary-col;}
+    to {transform:rotate(0deg) translateY(0); border-color: $primary-col;}
+}
+
+@include keyframes(disappear-left) {
+    0% {
+        opacity: 1;
+        transform:translateX(0);
+    }
+    100% {
+        opacity: 0;
+        transform:translateX(-3rem);
+        margin: 0;
+    }
+}
+
+@include keyframes (disappear-left-reverse) {
+    100% {
+        opacity: 1;
+        transform:translateX(0);
+        border-color: $primary-col;
+    }
+    0% {
+        opacity: 0;
+        transform:translateX(-3rem);
+        border-color: $secondary-col;
+    }
+}
+@include keyframes (fade-in){
+    0% { transform: translateY(-100%); height: 0; opacity: 0;}
+    99% { transform: translateY(-1%); height: 0; opacity: 0;}
+    100% { transform: translateY(0%); height: auto; opacity: 1;}
+}
+
+@include keyframes (fade-out){
+    0% { transform: translateY(0%); height: auto; opacity: 1;}
+    99% { transform: translateY(-1%); height: auto; opacity: 1;}
+    100% { transform: translateY(-100%); height: 0; opacity: 0;}
+}
