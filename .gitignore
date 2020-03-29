@@ -28,8 +28,8 @@ yarn-error.log*
 
 **/__pycache__
 
-/flask-backend/*
-!/flask-backend/*.py
+/flask_backend/static/*
+/flask_backend/templates
 
 /react-app/**/templates
 /react-app/public

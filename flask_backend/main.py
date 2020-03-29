@@ -1,5 +1,8 @@
 import flask
+from API.cards import cards
+
 app = flask.Flask(__name__)
+app.register_blueprint(cards)
 
 
 @app.route("/", defaults={"path": ""})
@@ -7,7 +10,9 @@ app = flask.Flask(__name__)
 def catch_all(path):
     return flask.render_template("index.html", token="Hello Flask+React!")
 
-
+# @app.route('/api/cards')
+# def get_cards():
+#     return { "cards": "I am a set of cards" }
 '''
 @app.route("/top-players")
 def top_players():
