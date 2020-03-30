@@ -29,7 +29,7 @@ const CardGallery = (props) => {
             );
         }
 
-        return <Row>{cols}</Row>;
+        return <Row>{cols}</Row>
     }
 
     return (
@@ -44,7 +44,7 @@ const CardGallery = (props) => {
                         
                         //hmmm cant tell if this is working yet due to number of cards == 420
                         if(cards.length - index <= leftover){
-                            if(index == cards.length) {
+                            if(index == cards.length-1) {
                                 elem = GenerateXCardsInARow(leftover, cards.length - leftover); 
                             }
                         }

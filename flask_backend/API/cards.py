@@ -8,7 +8,8 @@ def get_cards():
     ##request.args()
     cardImgs = []
     for card in cards_reader.jsonSet1:
-        cardImgs.append(card["assets"][0]["gameAbsolutePath"])
+        if card["collectible"]:
+            cardImgs.append(card["assets"][0]["gameAbsolutePath"])
         #count += 1
 
     return { "imgs": cardImgs }

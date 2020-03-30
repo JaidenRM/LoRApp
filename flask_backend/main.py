@@ -1,9 +1,9 @@
 import flask
-from API.cards import cards
+from API import cards, riot_lor
 
 app = flask.Flask(__name__)
-app.register_blueprint(cards)
-
+app.register_blueprint(cards.cards)
+app.register_blueprint(riot_lor.riot_lor)
 
 @app.route("/", defaults={"path": ""})
 @app.route("/<path:path>")

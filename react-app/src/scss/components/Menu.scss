@@ -3,10 +3,10 @@
     position: fixed;
     top: 0;
     width: 100%;
+    margin: 0;
     z-index: $z-menu;
 
     .hamburger {
-        margin-left: 0.5rem;
         height: $xs-menu-height;
         padding-top: 0.2rem;
 
