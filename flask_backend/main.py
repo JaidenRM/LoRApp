@@ -1,13 +1,18 @@
 import flask
-app = flask.Flask(__name__)
+from API import cards, riot_lor
 
+app = flask.Flask(__name__)
+app.register_blueprint(cards.cards)
+app.register_blueprint(riot_lor.riot_lor)
 
 @app.route("/", defaults={"path": ""})
 @app.route("/<path:path>")
 def catch_all(path):
     return flask.render_template("index.html", token="Hello Flask+React!")
 
-
+# @app.route('/api/cards')
+# def get_cards():
+#     return { "cards": "I am a set of cards" }
 '''
 @app.route("/top-players")
 def top_players():

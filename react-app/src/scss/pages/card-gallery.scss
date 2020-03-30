@@ -1,0 +1,10 @@
+.card-gallery {
+    img {
+        width: 100%;
+
+        @include responsive($bp-lg) {
+            width: auto;
+            height: 20rem;
+        }
+    }
+}
