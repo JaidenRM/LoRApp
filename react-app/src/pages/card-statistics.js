@@ -1,10 +1,6 @@
 import React from 'react';
-const CardStatistics = (props) => {
-    return (
-        <div>
-            <h1>Card Statistics</h1>
-        </div>
-    )
-}
+import UnderConstruction from '../components/UnderConstruction';
+
+const CardStatistics = (props) => <UnderConstruction/>
 
 export default CardStatistics;

@@ -1,11 +1,6 @@
 import React from 'react';
+import UnderConstruction from '../components/UnderConstruction';
 
-const DeckLibrary = (props) =>  {
-    return (
-        <div>
-            <h1>Deck Library</h1>
-        </div>
-    )
-}
+const DeckLibrary = (props) => <UnderConstruction/>
 
 export default DeckLibrary;
