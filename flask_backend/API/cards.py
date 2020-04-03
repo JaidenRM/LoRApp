@@ -13,3 +13,7 @@ def get_cards():
         #count += 1
 
     return { "imgs": cardImgs }
+
+@cards.route('/globals')
+def get_globals():
+    return cards_reader.jsonGlobals

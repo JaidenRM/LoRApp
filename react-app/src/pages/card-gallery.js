@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'reactstrap';
+import Card from '../components/Card.tsx';
 
 const CardGallery = (props) => {
     const [cards, setCards] = useState([""]);
@@ -24,7 +25,7 @@ const CardGallery = (props) => {
         for(var i = 0; i < numOfCols; i++) {
             cols.push( 
                 <Col>
-                    <img src={cards[startIndex+i]}></img>
+                    <Card imgUrl={cards[startIndex+i]}></Card>
                 </Col>
             );
         }

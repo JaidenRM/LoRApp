@@ -1,10 +1,9 @@
 import React from 'react';
+import FilterCards from '../components/FilterCards';
 
 const DeckBuilder = (props) => {
     return (
-        <div>
-            <h1>Deck Builder</h1>
-        </div>
+        <FilterCards/>
     )
 }
 
