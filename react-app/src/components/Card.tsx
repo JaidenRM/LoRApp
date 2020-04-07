@@ -8,11 +8,12 @@ interface CardProps {
     region: string;
     keywords: string[];
     imgUrl: string;
+    className: string;
 }
 
 const Card = (props : CardProps) => {
     
-    return <img src={props.imgUrl} />
+    return <img className={props.className} src={props.imgUrl} />
 }
 
 

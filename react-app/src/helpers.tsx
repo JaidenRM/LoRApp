@@ -6,7 +6,7 @@ import { isNullOrUndefined } from 'util';
 // and in each col call each of the objects members that are given
 const image_members =  ["iconAbsolutePath"]
 
-export const CreateLayoutWithObjectMembers = (objCol, membersCol, numOfCols, component) => {
+export const CreateLayoutWithObjectMembers = (objCol, membersCol, numOfCols, component, componentProps) => {
     let rows = [];
     let cols = [];
 
@@ -17,7 +17,7 @@ export const CreateLayoutWithObjectMembers = (objCol, membersCol, numOfCols, com
         
         cols.push(
             <Col>
-                {isNullOrUndefined(component) ? innerElem : React.cloneElement(component, {}, innerElem)}
+                {isNullOrUndefined(component) ? innerElem : React.cloneElement(component, componentProps, innerElem)}
             </Col>
         )
     
@@ -32,14 +32,14 @@ export const CreateLayoutWithObjectMembers = (objCol, membersCol, numOfCols, com
     return rows;
 }
 
-export const CreateLayoutWithObjects = (objCol, numOfCols, component) => {
+export const CreateLayoutWithObjects = (objCol, numOfCols, component, componentProps = {}) => {
     let rows = [];
     let cols = [];
 
     for(var i = 0; i < objCol.length; i++) {
         cols.push(
             <Col>
-                {isNullOrUndefined(component) ? objCol[i] : React.cloneElement(component, {}, objCol[i])}
+                {isNullOrUndefined(component) ? objCol[i] : React.cloneElement(component, componentProps, objCol[i])}
             </Col>
         )
     

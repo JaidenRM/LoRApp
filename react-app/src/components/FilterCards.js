@@ -4,7 +4,6 @@ import {
     //Dropdown, DropdownToggle, DropdownMenu, DropdownItem,
     Button, Input
 } from 'reactstrap';
-import { CreateLayoutWithObjectMembers, CreateLayoutWithObjects } from '../helpers.tsx';
 import ActiveButton from './ActiveButton';
 
 const FilterCards = (props) => {
@@ -13,42 +12,99 @@ const FilterCards = (props) => {
     const [regions, setRegions] = useState({"regions": [{"name":"", "nameRef": "", "iconAbsolutePath": "", "abbreviation": ""}]});
     const [rarities, setRarities] = useState({"rarities": [{"name":"", "nameRef": ""}]});
     const [isOpen, setIsOpen] = useState(true);
+    const [filter, setFilter] = useState({});
 
+    //const UpdateCards = () => props.setCards(props.cards);
     const toggleOpen = () => setIsOpen(prevState => !prevState);
+    const setCards = (c) => props.setCards(c);
+    const UpdateFilter = (type, amount, isAdd) => {
 
-    useEffect(async () => {
-        const resp = await fetch('/api/cards/globals');
-        const json = await resp.json();
-        
-        setKeywords(json["keywords"]);
-        setRegions(json["regions"]);
-        setRarities(json["rarities"]);
+        if(isAdd) {
+            if(type in filter)
+                filter[type].push(amount);
+            else
+                filter[type] = [amount];
+        }
+        else {
+            filter[type].splice(filter[type].indexOf(amount), 1);
+            //remove type from dict if it is empty
+            if(filter[type].length == 0)
+                delete filter[type];    
+        }
+
+        setFilter(filter);
+        UpdateCards(props.cards);
+    }
+
+    const UpdateCards = (cardDict) => {
+        let newDict = {...cardDict};
+        Object.keys(newDict).map((cardCode) => {
+            let isShow = true;
+            
+            Object.keys(filter).map((type) => {
+                filter[type].forEach(f => {
+                    if(newDict[cardCode][type] == f){
+                        isShow = true;
+                        return;
+                    }
+                    else
+                        isShow = false;
+                })
+            })
+
+            newDict[cardCode]["isFiltered"] = !isShow;
+            //newDict[cardCode] = cardDict[cardCode];
+        })
+        setCards(newDict);
+        //set new cardDict
+    }
+
+    useEffect(() => {
+        fetchGlobals();
     }, [])
 
+    const fetchGlobals = async () => {
+        try {
+            const resp = await fetch('api/cards/globals');
+            const json = await resp.json();
+        
+            setKeywords(json["keywords"]);
+            setRegions(json["regions"]);
+            setRarities(json["rarities"]);
+        } catch(error) {
+            console.log(error);
+        }
+    }
+
     return (
-        <Container className={`filter ${isOpen ? "show" : "hidden"}`}>
-            <Row className="filter__header">
-                <Col className="filter__header_title">
-                    <h1>Filters</h1>
-                </Col>
-                <Col xs="auto" className="filter__header_close" onClick={toggleOpen}>
-                    &times;
+        <Container className={`filter_wrapper ${isOpen ? "show" : "hidden"}`} >
+            <Row className="filter">
+                <Col>
+                    <Row className="filter__header">
+                        <Col className="filter__header_title">
+                            <h1>Filters</h1>
+                        </Col>
+                        <Col xs="auto" className="filter__header_close" onClick={toggleOpen}>
+                            &times;
+                        </Col>
+                    </Row>
+                    <Regions regions={regions} filter={UpdateFilter} />
+                    <Costs filter={UpdateFilter} />
+                    <Types filter={UpdateFilter} />
+                    <Rarities rarities={rarities} filter={UpdateFilter} />
+                    <Keywords keywords={keywords} filter={UpdateFilter} />
                 </Col>
             </Row>
-            <Regions regions={regions} />
-            <Costs />
-            <Types />
-            <Rarities rarities={rarities} />
-            <Keywords keywords={keywords} />
         </Container>
     );
-    
 }
 
 //hmmm look at this whole props/state thing with parents
 //want the json dicts to be in the parent
 const Regions = (props) => {
-    const membersToCall = ["name", "iconAbsolutePath"];
+    const membersToCall = ["iconAbsolutePath", "name"];
+
+    const Filter = (type, amount, isAdd) => props.filter(type, amount, isAdd);
 
     return (
         <Row className="filter__regions">
@@ -56,7 +112,20 @@ const Regions = (props) => {
                 <Row>
                     <h2>Regions</h2>
                 </Row>
-                {CreateLayoutWithObjectMembers(props.regions, membersToCall, 3, <ActiveButton/>)}
+                <Row>
+                    {Object.keys(props.regions).map((region) => {
+                        return(
+                            <Col xs={4}>
+                                <ActiveButton type={"region"} val={props.regions[region]["name"]} onClick={Filter}>
+                                    {membersToCall.map((member, index) => {
+                                        let val = props.regions[region][member];
+                                        return index == 0 ? <img src={val}/> : val;
+                                    })}
+                                </ActiveButton>
+                            </Col>
+                        )
+                    })}
+                </Row>
             </Col>
         </Row>
     )
@@ -65,8 +134,10 @@ const Regions = (props) => {
 const Costs = (props) => {
     const classNm = "filter__costs";
     const numValues = ["0", "1", "2", "3", "4", "5", "6", "7+"];
-    const stats = ["Mana", "Attack", "Health"];
-    
+    const stats = ["Cost", "Attack", "Health"];
+
+    const Filter = (type, amount, isAdd) => props.filter(type, amount, isAdd);
+
     return (
         <Row className={classNm}>
             <Col>
@@ -81,7 +152,15 @@ const Costs = (props) => {
                                     {stat}
                                 </Row>
                                 <Row className={classNm + "_" + stat + "_filter"}>
-                                    { numValues.map((num) => <Col><ActiveButton>{num}</ActiveButton></Col>) }
+                                    { numValues.map((num) => {
+                                        return(
+                                            <Col xs={1}>
+                                                <ActiveButton type={stat.toLowerCase()} val={num} onClick={Filter}>
+                                                    {num}
+                                                </ActiveButton>
+                                            </Col>
+                                        )}) 
+                                    }
                                 </Row>
                             </Col>
                         </Row>
@@ -94,6 +173,8 @@ const Costs = (props) => {
 
 const Types = (props) => {
     const cardTypes = ["Champion", "Follower", "Spell"]
+
+    const Filter = (type, amount, isAdd) => props.filter(type, amount, isAdd);
     
     return (
         <Row className="filter__types">
@@ -101,7 +182,17 @@ const Types = (props) => {
                 <Row>
                     <h2>Types</h2>
                 </Row>
-                {CreateLayoutWithObjects(cardTypes, 4, <ActiveButton/>)}
+                <Row>
+                    {cardTypes.map((type) => {
+                        return ( 
+                            <Col xs={4}>
+                                <ActiveButton type="type" val={type} onClick={Filter}>
+                                    {type}
+                                </ActiveButton>
+                            </Col>
+                        )
+                    })}
+                </Row>
             </Col>
         </Row>
     )
@@ -110,13 +201,25 @@ const Types = (props) => {
 const Rarities = (props) => {
     const membersToCall =  ["name"];
     
+    const Filter = (type, amount, isAdd) => props.filter(type, amount, isAdd);
+
     return (
         <Row className="filter__rarities">
             <Col>
                 <Row>
                     <h2>Rarities</h2>
                 </Row>
-                {CreateLayoutWithObjectMembers(props.rarities, membersToCall, 4, <ActiveButton/>)}
+                <Row>
+                    {Object.keys(props.rarities).map((rarity) => {
+                        return(
+                            <Col xs={4}>
+                                <ActiveButton type="rarity" val={rarity} onClick={Filter}>
+                                    {membersToCall.map((member) => props.rarities[rarity][member])}
+                                </ActiveButton>
+                            </Col>
+                        )
+                    })}
+                </Row>
             </Col>
         </Row>
     )
@@ -126,6 +229,8 @@ const Keywords = (props) => {
     //dropdown
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [selected, setSelected] = useState("Select a keyword...");
+
+    const Filter = (type, amount, isAdd) => props.filter(type, amount, isAdd);
     const toggle = () => setDropdownOpen(prevState => !prevState);
     const selectMe = (text) => setSelected(text);
 

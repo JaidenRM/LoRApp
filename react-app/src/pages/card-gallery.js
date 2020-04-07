@@ -1,63 +1,57 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import Card from '../components/Card.tsx';
+import FilterCards from '../components/FilterCards';
 
 const CardGallery = (props) => {
-    const [cards, setCards] = useState([""]);
+    const [cards, setCards] = useState({});
+    const [nonCollectible, setNonCollectible] = useState({});
+    const setCardsDict = c => setCards(c);
 
     useEffect(() => {
-        fetch("/api/cards")
-            .then(res => res.json())
-            .then(data => {
-                let imgUrls = [];
-                
-                for(var i = 0; i < data.imgs.length; i++) {
-                    imgUrls.push(data.imgs[i]);
-                }
-
-                setCards(imgUrls);
-            })
+        fetchCards();
     }, []);
     
-    function GenerateXCardsInARow(numOfCols, startIndex) {
-        let cols = [];
+    const fetchCards = async () => {
+        try {
+            const resp = await fetch("/api/cards/all");
+            const json = await resp.json();
 
-        for(var i = 0; i < numOfCols; i++) {
-            cols.push( 
-                <Col>
-                    <Card imgUrl={cards[startIndex+i]}></Card>
-                </Col>
-            );
+            let collectible = {};
+            let nonCollectible = {};
+            let keys = Object.keys(json);
+
+            keys.forEach((key) => {
+                if (json[key]["collectible"])
+                    collectible[key] = json[key];
+                else
+                    nonCollectible[key] = json[key];
+            });
+
+            setCards(collectible);
+            setNonCollectible(nonCollectible);
+        } catch(error) {
+            console.log(error);
         }
-
-        return <Row>{cols}</Row>
     }
 
     return (
         <Container fluid className="card-gallery">
+            <FilterCards cards={cards} setCards={setCardsDict} />
             <Row>
                 <h1>Card Gallery</h1>
             </Row>
-                {cards.map((imgUrl, index) => 
-                    {
-                        let elem = null;
-                        let leftover = cards.length % 4;
-                        
-                        //hmmm cant tell if this is working yet due to number of cards == 420
-                        if(cards.length - index <= leftover){
-                            if(index == cards.length-1) {
-                                elem = GenerateXCardsInARow(leftover, cards.length - leftover); 
-                            }
-                        }
-                        else if(index != 0 && index % 4 == 0)
-                        {
-                            elem = GenerateXCardsInARow(4, index-4); 
-                        }
-
-                        return elem;
-                    })
-                        
-                })}
+            <Row>
+                {Object.keys(cards).map((key, index) => 
+                    {   
+                        return(
+                            <Col xs={3} className={cards[key]["isFiltered"] ? "hidden" : "show"}>
+                                <Card imgUrl={cards[key]["assets"][0]["gameAbsolutePath"]}></Card>
+                            </Col>
+                        )
+                    })     
+                }
+            </Row>
         </Container>
     )
 }
