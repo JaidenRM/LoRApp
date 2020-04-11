@@ -1,0 +1,44 @@
+.sidebar_wrapper {
+    position: fixed;
+    top: 5rem;
+    bottom: 0;
+    left: 0;
+    z-index: $z-menu - 1;
+    max-width: 600px;
+
+    .sidebar {
+        &_icon {
+            width: 5rem;
+            padding: 0;
+
+            &__image {
+                width: 5.5rem;
+                height: 5rem;
+                padding: 0 0.5rem;
+                background-color: $primary-col;
+                
+                &.activated {
+                    background-color: $tertiary-col;
+                }
+            }
+        }
+
+        &_component {
+            &.show {
+                display: flex;
+                
+                .sidebar_component__child > .col {
+                    height: 80vh;
+                }
+            }
+
+            &.hidden {
+                display: none;
+            }
+        }
+
+        img {
+            max-width: 4.5rem;
+        }
+    }
+}

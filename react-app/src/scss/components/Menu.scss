@@ -5,9 +5,11 @@
     width: 100%;
     margin: 0;
     z-index: $z-menu;
+    display: inline-block;
+    vertical-align: middle;
 
     .hamburger {
-        height: $xs-menu-height;
+        height: $menu-height;
         padding-top: 0.2rem;
 
         &:hover {
@@ -102,7 +104,7 @@
 
         @include responsive($bp-md) {
             //width: 100%;
-            min-height: $xs-menu-height;
+            min-height: $menu-height;
             text-align: center;
         }
 

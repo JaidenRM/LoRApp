@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import Card from '../components/Card.tsx';
 import FilterCards from '../components/FilterCards';
+import Sidebar from '../components/Sidebar';
 
 const DeckBuilder = (props) => {
     const [cards, setCards] = useState({});
@@ -37,7 +38,9 @@ const DeckBuilder = (props) => {
 
     return (
         <Container fluid className="card-gallery">
-            <FilterCards cards={cards} setCards={setCardsDict} />
+            <Sidebar>
+                <FilterCards cards={cards} setCards={setCardsDict} />
+            </Sidebar>
             <Row>
                 <h1>Card Gallery</h1>
             </Row>
@@ -45,7 +48,10 @@ const DeckBuilder = (props) => {
                 {Object.keys(cards).map((key) => 
                     {   
                         return(
-                            <Col xs={3} className={cards[key]["isFiltered"] ? "hidden" : "show"}>
+                            <Col 
+                                xs={6} sm={4} md={3}
+                                className={cards[key]["isFiltered"] ? "hidden" : "show"}
+                            >
                                 <Card imgUrl={cards[key]["assets"][0]["gameAbsolutePath"]}></Card>
                             </Col>
                         )
