@@ -4,6 +4,8 @@
     bottom: 0;
     left: 0;
     z-index: $z-menu - 1;
+    width: fit-content;
+    height: fit-content;
     max-width: 600px;
 
     .sidebar {

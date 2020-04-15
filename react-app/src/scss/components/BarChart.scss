@@ -1,0 +1,31 @@
+.bar-chart {
+    height: 200px;
+    &__column {
+        display: flex;
+        flex-direction: column-reverse;
+
+        &_demacia {
+            background-color: $col-demacia;
+        }
+
+        &_noxus {
+            background-color: $col-noxus;
+        }
+
+        &_pnz {
+            background-color: $col-pnz;
+        }
+
+        &_freljord {
+            background-color: $col-freljord;
+        }
+
+        &_ionia {
+            background-color: $col-ionia;
+        }
+
+        &_si {
+            background-color: $col-si;
+        }
+    }
+}

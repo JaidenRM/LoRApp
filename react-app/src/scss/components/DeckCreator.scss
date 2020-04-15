@@ -1,0 +1,12 @@
+.deck-creator {
+    background-color: $secondary-col;
+    border: 0.25rem solid $primary-col;
+
+    &__deck_name {
+
+        &__icon {
+            height: 1.5rem;
+            width: auto;
+        }
+    }
+}

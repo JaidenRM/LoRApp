@@ -42,10 +42,10 @@ const CardGallery = (props) => {
             <Sidebar>
                 <FilterCards cards={cards} setCards={setCardsDict} />
             </Sidebar>
-            <Row>
+            <Row className="card-gallery__title">
                 <h1>Card Gallery</h1>
             </Row>
-            <Row>
+            <Row className="card-gallery__cards">
                 {Object.keys(cards).map((key, index) => 
                     {   
                         return(
@@ -53,7 +53,8 @@ const CardGallery = (props) => {
                                 xs={6} sm={4} md={3} 
                                 className={cards[key]["isFiltered"] ? "hidden" : "show"}
                             >
-                                <Card imgUrl={cards[key]["assets"][0]["gameAbsolutePath"]}></Card>
+                                <Card imgUrl={cards[key]["assets"][0]["gameAbsolutePath"]}
+                                    className="card-gallery__cards_card"></Card>
                             </Col>
                         )
                     })     
