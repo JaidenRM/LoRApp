@@ -28,8 +28,9 @@ const DeckBuilder = (props) => {
             //check we aren't violating any deck building constraints
             if( dupes >= 3 
                 || (champs >= 6 && cards[cardCode]["supertype"] == "Champion")
-                || (factions.keys >= 2 && !(cards[cardCode]["region"] in factions.keys)))
-                    return;
+                || (Object.keys(factions).length >= 2 
+                    && !(Object.keys(factions).includes(cards[cardCode]["region"]))))
+                        return;
 
             currDeck.push(cards[cardCode]);
         }  

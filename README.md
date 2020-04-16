@@ -10,7 +10,33 @@ about Legends of Runeterra.
 Possibly include db too for more
 logic.
 
+============================
+*      How to setup        *
+============================
+Pre-reqs (I believe):
+	* Python 3.3+
+	* NodeJS
 
+1. Clone the repo
+2. Create a virtual env for Python from the Root
+	i. Run this cmd in terminal (the last part is name of dir, which I called venv)
+		a. Windows (py -m venv venv) 
+		b. Mac/Linux (python3 -m venv venv) 
+3. Activate your virtual environment (venv or whatever you named the dir)
+	i. Run this cmd in terminal
+		a. Windows (.\venv\Scripts\activate)
+		b. Mac\Linux (source venv/bin/activate)
+4. Install venv packages from requirements.txt
+	i. The .txt file should be in the root, run this cmd
+		a. (pip install -r requirements.txt)
+5. Install node modules
+	i. Navigate to the folder containing the package.json file
+	ii. Run (npm install) which should install all the modules from the json file
+
+
+============================
+* 	    Rough Design       *
+============================
 Rough idea on what the website will have:
 
 	* Home (idk what is going here)
