@@ -41,29 +41,9 @@ const DeckCreator = (props) => {
                 </Col>
                 <Col xs={6} sm={3}>
                     <Label for="lbl_total_count">Total:</Label>
-                    <span id="lbl_total_count">{deckProps.length}/{MAX_CARDS}</span>
+                    <span id="lbl_total_count">{deckProps["total"]}/{MAX_CARDS}</span>
                 </Col>
                 <Col xs={12}>
-                    {/* <Row>
-                        <Col>{deckProps["0"]}</Col>
-                        <Col>{deckProps["1"]}</Col>
-                        <Col>{deckProps["2"]}</Col>
-                        <Col>{deckProps["3"]}</Col>
-                        <Col>{deckProps["4"]}</Col>
-                        <Col>{deckProps["5"]}</Col>
-                        <Col>{deckProps["6"]}</Col>
-                        <Col>{deckProps["7+"]}</Col>
-                    </Row>
-                    <Row>
-                        <Col>0</Col>
-                        <Col>1</Col>
-                        <Col>2</Col>
-                        <Col>3</Col>
-                        <Col>4</Col>
-                        <Col>5</Col>
-                        <Col>6</Col>
-                        <Col>7+</Col>
-                    </Row> */}
                     {props.barChart}
                 </Col>
             </Row>
@@ -81,13 +61,14 @@ const DeckCreator = (props) => {
     )
 
     function ParseDeck() {
-        const defaultDict = { "spells": 0, "followers": 0, "champions": 0
+        const defaultDict = { "spells": 0, "followers": 0, "champions": 0, "total": 0
         , "0": 0, "1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0, "7+": 0}
 
         if(props.deck) {
             Object.keys(props.deck).forEach(key => {
                 let cost = Number(props.deck[key]["cost"]) >= 7
                     ? "7+" : props.deck[key]["cost"];
+                    
                 if(props.deck[key]["type"] == "Spell") {
                     defaultDict["spells"] += 1;
                     defaultDict[cost] += 1;
@@ -100,6 +81,8 @@ const DeckCreator = (props) => {
                     
                     defaultDict[cost] += 1;
                 }
+
+                defaultDict["total"] += 1;
             })
         }
 

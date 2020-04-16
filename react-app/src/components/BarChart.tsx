@@ -3,6 +3,8 @@ import { Container, Row, Col } from 'reactstrap'
 
 interface BCProps {
     x_values: {[key: string]: [{[identifier: string]: string}]};
+    x_width: string;
+    x_width_gaps: boolean;
 }
 
 const BarChart = (props : BCProps) => {
@@ -23,8 +25,11 @@ const BarChart = (props : BCProps) => {
                 {Object.keys(xValues).map(xVal => {
                     return(
                         <Col 
-                            className="bar-chart__column" 
-                            style={{height: String(xHeights[xVal]*100/maxHeight + "%")}}
+                            className={`bar-chart__column ${props.x_width_gaps ? "gap" : ""}`} 
+                            style={{
+                                "height": String(xHeights[xVal]*100/maxHeight + "%")
+                                , "max-width": props.x_width == null ? "auto" : props.x_width
+                            }}
                         >
                             {Object.keys(xValues[xVal]).map(id => {
                                 return(
@@ -41,7 +46,11 @@ const BarChart = (props : BCProps) => {
             <Row className="bar-chart__x-axis">
                 {Object.keys(xValues).map(xVal => {
                     return (
-                        <Col>{xVal}</Col>
+                        <Col className={props.x_width_gaps ? "gap" : ""}
+                            style={{"max-width": props.x_width == null ? "auto" : props.x_width}}
+                        >
+                            {xVal}
+                        </Col>
                     )
                 })}
             </Row>

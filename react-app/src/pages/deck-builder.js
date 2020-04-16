@@ -72,7 +72,7 @@ const DeckBuilder = (props) => {
         <Container fluid className="card-gallery">
             <Sidebar>
                 <FilterCards cards={cards} setCards={setCards} />
-                <DeckCreator deck={deck} barChart={<BarChart x_values={bCData}/>}/>
+                <DeckCreator deck={deck} barChart={<BarChart x_values={bCData} x_width="1rem" x_width_gaps={true} />}/>
             </Sidebar>
             <Row>
                 <h1>Card Gallery</h1>
@@ -100,11 +100,14 @@ const DeckBuilder = (props) => {
     )
 
     function UpdateBarChart(currDeck) {
-        let BCDict = {};
+        let BCDict = {
+            "0": {}, "1": {}, "2": {}, "3": {}
+            , "4": {}, "5": {}, "6": {}, "7+": {}
+        };
 
         currDeck.forEach(card => {
-            let cost = card["cost"];
-            let region = card["region"];
+            let cost = card["cost"] >= 7 ? "7+" : card["cost"];
+            let region = card["regionRef"];
 
             if(cost in BCDict) {
                 if(region in BCDict[cost])
@@ -119,9 +122,7 @@ const DeckBuilder = (props) => {
             }
         })
 
-        //console.log(BCDict);
         setBCData(BCDict);
-        //console.log(bCData);
     }
 }
 
