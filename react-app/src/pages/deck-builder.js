@@ -5,6 +5,7 @@ import FilterCards from '../components/FilterCards';
 import Sidebar from '../components/Sidebar';
 import DeckCreator from '../components/DeckCreator';
 import BarChart from '../components/BarChart.tsx';
+import * as Constants from '../constants.tsx';
 
 const DeckBuilder = (props) => {
     const [cards, setCards] = useState({});
@@ -26,9 +27,9 @@ const DeckBuilder = (props) => {
                 factions[card["region"]] = 1;
             })
             //check we aren't violating any deck building constraints
-            if( dupes >= 3 
-                || (champs >= 6 && cards[cardCode]["supertype"] == "Champion")
-                || (Object.keys(factions).length >= 2 
+            if( dupes >= Constants.MAX_DUPES 
+                || (champs >= Constants.MAX_CHAMPS && cards[cardCode]["supertype"] == "Champion")
+                || (Object.keys(factions).length >= Constants.MAX_FACTIONS 
                     && !(Object.keys(factions).includes(cards[cardCode]["region"]))))
                         return;
 

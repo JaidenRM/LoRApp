@@ -5,11 +5,9 @@ import {
     , Input, Label, Button
 } from 'reactstrap'
 import EditIcon from '../images/edit-pen.png'
+import * as Constants from '../constants.tsx';
 
 const DeckCreator = (props) => {
-    const MAX_CHAMPS = 6;
-    const MAX_CARDS = 40;
-
     const [deckProps, setDeckProps] = useState({});
     
     useEffect(() => setDeckProps(ParseDeck), [props.deck]);
@@ -37,11 +35,11 @@ const DeckCreator = (props) => {
                 </Col>
                 <Col xs={6} sm={3}>
                     <Label for="lbl_champions_count">Champions:</Label>
-                    <span id="lbl_champions_count">{deckProps["champions"]}/{MAX_CHAMPS}</span>
+                    <span id="lbl_champions_count">{deckProps["champions"]}/{Constants.MAX_CHAMPS}</span>
                 </Col>
                 <Col xs={6} sm={3}>
                     <Label for="lbl_total_count">Total:</Label>
-                    <span id="lbl_total_count">{deckProps["total"]}/{MAX_CARDS}</span>
+                    <span id="lbl_total_count">{deckProps["total"]}/{Constants.MAX_CARDS}</span>
                 </Col>
                 <Col xs={12}>
                     {props.barChart}
