@@ -12,8 +12,6 @@ const BarChart = (props : BCProps) => {
     const [xHeights, setXHeights] = useState({});
     const [maxHeight, setMaxHeight] = useState(1);
 
-    console.log(props.x_values);
-
     useEffect(() => {
         setXValues(props.x_values);
         CalculateHeights(props.x_values);

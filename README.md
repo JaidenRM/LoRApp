@@ -33,6 +33,23 @@ Pre-reqs (I believe):
 	i. Navigate to the folder containing the package.json file
 	ii. Run (npm install) which should install all the modules from the json file
 
+============================
+*	 	Known Issues	   *
+============================
+1. Encoded deck is a bit out of order alphabetically in final grouped list
+2. Filter only filters one thing at a time
+3. Cards, should display numerically -> alphabetically (cost -> name) order
+4. Chuck underconstruction pic in jumbotron
+5. Stuff I missed XD...
+
+============================
+*		To-Do List		   *
+============================
+1. Update home
+2. On card click show associated cards in lightbox or something
+3. Chuck challengers into a table with pagination
+4. About page?
+5. Animations/load card images with delay based on scroll
 
 ============================
 * 	    Rough Design       *

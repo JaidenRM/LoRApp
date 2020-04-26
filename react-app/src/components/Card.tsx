@@ -17,7 +17,7 @@ interface CardProps {
 const Card = (props : CardProps) => {
     const GetCardCode = () => props.onClick(props.cardCode);
 
-    return <img className={props.className} src={props.imgUrl} onMouseDown={GetCardCode} />
+    return <img className={props.className} src={props.imgUrl} onClick={GetCardCode} />
 }
 
 

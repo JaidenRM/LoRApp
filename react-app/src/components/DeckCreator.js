@@ -5,13 +5,72 @@ import {
     , Input, Label, Button
 } from 'reactstrap'
 import EditIcon from '../images/edit-pen.png'
-import * as Constants from '../constants.tsx';
+import * as Constants from '../constants.tsx'
+import MyModal from './MyModal.tsx'
 
 const DeckCreator = (props) => {
+    //cant rely on props as they will be updated before states
+    //i.e. props will update before render, states after alas conflict at initial render
+    //console.log(props.deck);
+    const [deck, setDeck] = useState({});
     const [deckProps, setDeckProps] = useState({});
+    const [decklist, setDecklist] = useState({});
+    const [deckCode, setDeckCode] = useState("");
+
+    const RemoveFromDeck = code => props.handler(code, false);
+    const CreateDeck = async () => {
+        let resp = await fetch("/api/deck/encode", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(decklist)
+        });
+        let json = await resp.json();
+
+        setDeckCode(json.code);
+    }
+    const ModalBodyText = 
+            <Container>
+                <Row>
+                    <Col>
+                        Down below is the text you can use to import your 
+                        deck into Legends of Runeterra or other websites/
+                        features that allow this.
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <Input type="text" value={deckCode} readOnly></Input>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        Simply copy the above code!
+                    </Col>
+                </Row>
+            </Container>
+
+    const DeckCodeModal = () => {
+        if(deckCode != "" && deckCode != null) {
+            return <MyModal 
+                openModalText="View deck code"
+                modalTitle="Generated deck code"
+                modalBody={ModalBodyText}
+            />
+        }
+
+        return ""
+    }   
     
-    useEffect(() => setDeckProps(ParseDeck), [props.deck]);
-    
+    useEffect(() => {
+        setDeck(props.deck);
+        let parsedDecks = ParseDeck();
+        setDeckProps(parsedDecks["props"]);
+        setDecklist(parsedDecks["codes"]);
+        console.log(parsedDecks["codes"]);
+    }, [props.deck]);
+
     return (
         <Container className="deck-creator">
             <Row className="deck-creator__deck_name">
@@ -47,22 +106,31 @@ const DeckCreator = (props) => {
             </Row>
             <Row className="deck-creator__cards">
                 <ul>
-                    <li>Card 1</li>
-                    <li>Card 2</li>
-                    <li>Card 3</li>
+                    {Object.keys(decklist).sort(SortCards).map(code => {
+                        let key = decklist[code]["index"];
+                        //console.log(decklist);
+                        return(
+                            <li>
+                                <Button onClick={() => RemoveFromDeck(code)}>
+                                    {deck[key]["cost"]}: {deck[key]["name"]} x{decklist[code]["total"]}
+                                </Button>
+                            </li>
+                        )
+                    })}
                 </ul>
             </Row>
             <Row className="deck-creator__save_btn">
-                <Button>Save</Button>
+                <Button onClick={CreateDeck}>Save</Button>
+                <DeckCodeModal/>
             </Row>
         </Container>
     )
 
     function ParseDeck() {
-        const defaultDict = { "spells": 0, "followers": 0, "champions": 0, "total": 0
-        , "0": 0, "1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0, "7+": 0}
+        const defaultDict = { "spells": 0, "followers": 0, "champions": 0, "total": 0 };
+        const codeDict = {};
 
-        if(props.deck) {
+        if(deck) {
             Object.keys(props.deck).forEach(key => {
                 let cost = Number(props.deck[key]["cost"]) >= 7
                     ? "7+" : props.deck[key]["cost"];
@@ -80,11 +148,34 @@ const DeckCreator = (props) => {
                     defaultDict[cost] += 1;
                 }
 
+                if(!codeDict[props.deck[key]["cardCode"]])
+                    codeDict[props.deck[key]["cardCode"]] = {"index": key, "total": 1};
+                else
+                    codeDict[props.deck[key]["cardCode"]]["total"] += 1;
+
                 defaultDict["total"] += 1;
             })
         }
 
-        return defaultDict;
+        return { "props": defaultDict, "codes": codeDict };
+    }
+
+    function SortCards(a, b) {
+        let aInd = decklist[a]["index"];
+        let bInd = decklist[b]["index"];
+
+        if(Number(deck[aInd]["cost"]) < Number(deck[bInd]["cost"]))
+            return -1;
+
+        if(Number(deck[aInd]["cost"]) > Number(deck[bInd]["cost"]))
+            return 1;
+        
+        if(deck[aInd]["name"] < deck[bInd]["name"])
+            return -1;
+        if(deck[aInd]["name"] > deck[bInd]["name"])
+            return 1;
+
+        return 0;
     }
 }
 

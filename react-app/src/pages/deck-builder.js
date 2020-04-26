@@ -13,6 +13,12 @@ const DeckBuilder = (props) => {
     const [deck, setDeck] = useState([]);
     const [bCData, setBCData] = useState({});
 
+    const BC = <BarChart 
+                        x_values={bCData} 
+                        x_width="1rem" 
+                        x_width_gaps={true} 
+                    />;
+
     const AddToDeck = (cardCode, isAdd = true) => {
         let currDeck = [...deck];
         
@@ -36,7 +42,7 @@ const DeckBuilder = (props) => {
             currDeck.push(cards[cardCode]);
         }  
         else {
-            currDeck.splice(currDeck.indexOf(cards[cardCode]));
+            currDeck.splice(currDeck.indexOf(cards[cardCode]), 1);
         }
 
         setDeck(currDeck);
@@ -74,7 +80,7 @@ const DeckBuilder = (props) => {
         <Container fluid className="card-gallery">
             <Sidebar>
                 <FilterCards cards={cards} setCards={setCards} />
-                <DeckCreator deck={deck} barChart={<BarChart x_values={bCData} x_width="1rem" x_width_gaps={true} />}/>
+                <DeckCreator deck={deck} barChart={BC} handler={AddToDeck}/>
             </Sidebar>
             <Row>
                 <h1>Card Gallery</h1>

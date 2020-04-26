@@ -1,0 +1,11 @@
+.my-modal {
+    margin-top: $menu-height;
+    z-index: $z-modal;
+    
+    &__body {
+        
+        .row {
+            margin: 2rem 0;
+        }
+    }
+}

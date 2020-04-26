@@ -9,4 +9,12 @@
             width: auto;
         }
     }
+
+    &__cards {
+        max-height: calc(80vh - 200px - 20vh);
+        overflow-y: auto;
+        ul {
+            list-style-type: none;
+        }
+    }
 }
