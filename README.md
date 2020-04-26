@@ -1,6 +1,7 @@
 ============================
 *        Overview          *
 ============================
+
 Purpose of this app is so I 
 can learn Python and some 
 frameworks (Flask, React, Node). 
@@ -13,6 +14,7 @@ logic.
 ============================
 *      How to setup        *
 ============================
+
 Pre-reqs (I believe):
 	* Python 3.3+
 	* NodeJS
@@ -34,8 +36,9 @@ Pre-reqs (I believe):
 	ii. Run (npm install) which should install all the modules from the json file
 
 ============================
-*	 	Known Issues	   *
+*	 Known Issues	   *
 ============================
+
 1. Encoded deck is a bit out of order alphabetically in final grouped list
 2. Filter only filters one thing at a time
 3. Cards, should display numerically -> alphabetically (cost -> name) order
@@ -43,8 +46,9 @@ Pre-reqs (I believe):
 5. Stuff I missed XD...
 
 ============================
-*		To-Do List		   *
+*	To-Do List	   *
 ============================
+
 1. Update home
 2. On card click show associated cards in lightbox or something
 3. Chuck challengers into a table with pagination
@@ -52,8 +56,9 @@ Pre-reqs (I believe):
 5. Animations/load card images with delay based on scroll
 
 ============================
-* 	    Rough Design       *
+* 	Rough Design       *
 ============================
+
 Rough idea on what the website will have:
 
 	* Home (idk what is going here)
