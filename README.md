@@ -37,6 +37,7 @@ Pre-reqs (I believe):
 
 ============================
 *	 Known Issues	   *
+
 ============================
 
 1. Encoded deck is a bit out of order alphabetically in final grouped list
@@ -47,6 +48,7 @@ Pre-reqs (I believe):
 
 ============================
 *	To-Do List	   *
+
 ============================
 
 1. Update home
@@ -57,6 +59,7 @@ Pre-reqs (I believe):
 
 ============================
 * 	Rough Design       *
+
 ============================
 
 Rough idea on what the website will have:
