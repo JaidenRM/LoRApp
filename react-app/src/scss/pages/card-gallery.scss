@@ -1,10 +1,20 @@
 .card-gallery {
-    img {
-        width: 100%;
+    &__cards {
+        &_card {
+            width: 100%;
+    
+            @include responsive($bp-lg) {
+                width: auto;
+                height: 20rem;
+            }
+        }
 
-        @include responsive($bp-lg) {
-            width: auto;
-            height: 20rem;
+        .show {
+                display: flex;
+            }
+        
+        .hidden {
+            display: none;
         }
     }
 }

@@ -1,6 +1,6 @@
 .home {
     section {
-        min-height: calc(100vh - #{$xs-menu-height} - 0.5rem);
+        min-height: calc(100vh - #{$menu-height} - 0.5rem);
         width: 100%;
         border: 2px solid $tertiary-col;
         background-color: $primary-col;
@@ -14,7 +14,7 @@
     }
 
     .section-first {
-        margin-top: $xs-menu-height;
+        margin-top: $menu-height;
         
         .jumbotron {
             background-image: url("../../images/Legends-of-Runeterra.jpg");

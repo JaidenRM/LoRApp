@@ -6,18 +6,26 @@ $primary-col: #732DD0;
 $secondary-col: #18A4E7;
 $tertiary-col: #de7119;
 $background-col: #ececec;
+$col-demacia: yellow;
+$col-noxus: red;
+$col-pnz: orange;
+$col-si: green;
+$col-ionia: pink;
+$col-freljord: aqua;
+$col-bilgewater: brown;
 
 //z-indexes
 $z-menu: 2000;
+$z-modal: 5000;
 
 //constants
-$xs-menu-height: 4rem;
+$menu-height: 5rem;
 
 //screen size breakpoints
 /* Extra small devices (phones, 600px and less) */
 $bp-xs: 0px;
 /* Small devices (portrait tablets and large phones, 600px and up) */
-$bp-sm: 600;
+$bp-sm: 600px;
 /* Medium devices (landscape tablets, 768px and up) */
 $bp-md: 768px;
 /* Large devices (laptops/desktops, 992px and up) */

@@ -1,62 +1,65 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'reactstrap';
+import Card from '../components/Card.tsx';
+import FilterCards from '../components/FilterCards';
+import Sidebar from '../components/Sidebar';
 
 const CardGallery = (props) => {
-    const [cards, setCards] = useState([""]);
+    const [cards, setCards] = useState({});
+    const [nonCollectible, setNonCollectible] = useState({});
+    const setCardsDict = c => setCards(c);
 
+    //for single use API call
     useEffect(() => {
-        fetch("/api/cards")
-            .then(res => res.json())
-            .then(data => {
-                let imgUrls = [];
-                
-                for(var i = 0; i < data.imgs.length; i++) {
-                    imgUrls.push(data.imgs[i]);
-                }
-
-                setCards(imgUrls);
-            })
+        fetchCards();
     }, []);
     
-    function GenerateXCardsInARow(numOfCols, startIndex) {
-        let cols = [];
+    const fetchCards = async () => {
+        try {
+            const resp = await fetch("/api/cards/all");
+            const json = await resp.json();
 
-        for(var i = 0; i < numOfCols; i++) {
-            cols.push( 
-                <Col>
-                    <img src={cards[startIndex+i]}></img>
-                </Col>
-            );
+            let collectible = {};
+            let nonCollectible = {};
+            let keys = Object.keys(json);
+
+            keys.forEach((key) => {
+                if (json[key]["collectible"])
+                    collectible[key] = json[key];
+                else
+                    nonCollectible[key] = json[key];
+            });
+
+            setCards(collectible);
+            setNonCollectible(nonCollectible);
+        } catch(error) {
+            console.log(error);
         }
-
-        return <Row>{cols}</Row>
     }
 
     return (
         <Container fluid className="card-gallery">
-            <Row>
+            <Sidebar>
+                <FilterCards cards={cards} setCards={setCardsDict} />
+            </Sidebar>
+            <Row className="card-gallery__title">
                 <h1>Card Gallery</h1>
             </Row>
-                {cards.map((imgUrl, index) => 
-                    {
-                        let elem = null;
-                        let leftover = cards.length % 4;
-                        
-                        //hmmm cant tell if this is working yet due to number of cards == 420
-                        if(cards.length - index <= leftover){
-                            if(index == cards.length-1) {
-                                elem = GenerateXCardsInARow(leftover, cards.length - leftover); 
-                            }
-                        }
-                        else if(index != 0 && index % 4 == 0)
-                        {
-                            elem = GenerateXCardsInARow(4, index-4); 
-                        }
-
-                        return elem;
-                    })
-                        
-                })}
+            <Row className="card-gallery__cards">
+                {Object.keys(cards).map((key, index) => 
+                    {   
+                        return(
+                            <Col 
+                                xs={6} sm={4} md={3} 
+                                className={cards[key]["isFiltered"] ? "hidden" : "show"}
+                            >
+                                <Card imgUrl={cards[key]["assets"][0]["gameAbsolutePath"]}
+                                    className="card-gallery__cards_card"></Card>
+                            </Col>
+                        )
+                    })     
+                }
+            </Row>
         </Container>
     )
 }
