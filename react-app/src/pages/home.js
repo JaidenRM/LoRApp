@@ -5,21 +5,22 @@ import {
 } from 'reactstrap';
 import Heading from '../components/Heading';
 import ScrollTo from '../components/ScrollTo';
+import { TwitterTimelineEmbed } from 'react-twitter-embed';
 
 
 const Home = (props) => {
     const LoRTwitter = () => {
         return (
             <Row>
-                <a class="twitter-timeline" href="https://twitter.com/PlayRuneterra?ref_src=twsrc%5Etfw">
-                    Tweets by PlayRuneterra
-                </a> 
-                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                <TwitterTimelineEmbed
+                    sourceType="profile"
+                    screenName="PlayRuneterra"
+                    options={{height: "60vh", width: "50vw"}}
+                />
             </Row>
         )
     }
         
-
     const intro = 
         <Jumbotron>
             <Row>
@@ -68,9 +69,11 @@ const Home = (props) => {
                 </Col>
             </Row>
             <Row>
-                <Col xs="auto">
+                <Col>
                     List of issues:
                 </Col>
+            </Row>
+            <Row xs={{offset: 2}}>
                 <Col>
                     <ul>
                         <li>
@@ -90,7 +93,7 @@ const Home = (props) => {
         </Jumbotron>
     
     const todo =
-        <Jumbotron>an 
+        <Jumbotron>
             <Row>
                 <Col>
                     In this section I am going to be laying out the 
@@ -101,11 +104,27 @@ const Home = (props) => {
                 </Col>
             </Row>
             <Row>
-                <Col xs="auto">Upcoming features:</Col>
+                <Col>Upcoming features:</Col>
+            </Row>
+            <Row>
                 <Col>
                     <ul>
                         <li>
-
+                            On click of card, show associated cards and small 
+                            details like flavour
+                        </li>
+                        <li>
+                            Tidy up the top players to include in a table with 
+                            pagination and perhaps some search/filter
+                        </li>
+                        <li>
+                            When loading the cards, they are not in an order, 
+                            I will update this so they load in order according 
+                            to the following chain. Faction -> cost -> name.
+                        </li>
+                        <li>
+                            Add more animations/transitions to make the website 
+                            look better, i.e.: slow load cards as you scroll.
                         </li>
                     </ul>
                 </Col>
@@ -129,8 +148,8 @@ const Home = (props) => {
                     new champions, keywords and even a new region - as well as official 
                     support on iOS and Android devices. Teasing us with slow releases of 
                     YouTube cinematics of the existing regions and new champions coming to 
-                    them - found 
-                    <a href="https://www.youtube.com/channel/UCMZ5vTV7dLz_yoWw4nOzDwg">here</a> 
+                    them - found
+                    <a href="https://www.youtube.com/channel/UCMZ5vTV7dLz_yoWw4nOzDwg"> here</a> 
                     - they have started to, what would seem like, accelerate 
                     the reveal schedule as we edge closer to the release date. To keep up with 
                     the latest news, you can peek at their twitter timeline located just below
@@ -143,7 +162,6 @@ const Home = (props) => {
                 </Col>
             </Row>
         </Jumbotron>
-        
 
     return (
         <Container fluid className="home">

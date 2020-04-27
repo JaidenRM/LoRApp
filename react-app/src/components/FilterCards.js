@@ -19,7 +19,7 @@ const FilterCards = (props) => {
     const setCards = (c) => props.setCards(c);
 
     const UpdateFilter = (type, amount, isAdd) => {
-
+        
         if(isAdd) {
             if(type in filter)
                 filter[type].push(amount);
@@ -30,9 +30,9 @@ const FilterCards = (props) => {
             filter[type].splice(filter[type].indexOf(amount), 1);
             //remove type from dict if it is empty
             if(filter[type].length == 0)
-                delete filter[type];    
+                delete filter[type];
         }
-
+        console.log(filter)
         setFilter(filter);
         UpdateCards(props.cards);
     }
@@ -53,24 +53,29 @@ const FilterCards = (props) => {
         UpdateCards(props.cards);
     }
 
+    //filter incorrect
+    //once card filtered is set to true shouldn't be unset
     const UpdateCards = (cardDict) => {
         let newDict = {...cardDict};
         Object.keys(newDict).map((cardCode) => {
             let isShow = true;
             
             Object.keys(filter).map((type) => {
+                isShow = false;
                 filter[type].forEach(f => {
                     let inArray = Array.isArray(newDict[cardCode][type]) 
                                     && newDict[cardCode][type].includes(f);
                     let higherThanSeven = f == "7+" && Number(newDict[cardCode][type]) >= Number(f);
                     let equalString = newDict[cardCode][type] == f;
                     
+                    if(type in ["region"]) {
+                        isShow = newDict[cardCode][type] == f;
+                    }
+                    
                     if(inArray || higherThanSeven || equalString) {
                             isShow = true;
                             return;
                     }
-                    else
-                        isShow = false;
                 })
             })
 
