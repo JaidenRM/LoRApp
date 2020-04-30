@@ -60,13 +60,12 @@ const DeckBuilder = (props) => {
 
             let collectible = {};
             let nonCollectible = {};
-            let keys = Object.keys(json);
 
-            keys.forEach((key) => {
-                if (json[key]["collectible"])
-                    collectible[key] = json[key];
+            json.forEach((card) => {
+                if (card["collectible"])
+                    collectible[card["cardCode"]] = card;
                 else
-                    nonCollectible[key] = json[key];
+                    nonCollectible[card["cardCode"]] = card;
             });
 
             setCards(collectible);
@@ -98,7 +97,7 @@ const DeckBuilder = (props) => {
                                     className="card-gallery__cards_card"
                                     cardCode={cards[key]["cardCode"]}
                                     onClick={AddToDeck}
-                                ></Card>
+                                />
                             </Col>
                         )
                     })     

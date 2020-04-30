@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'reactstrap';
+import PaginatedTable from '../components/PaginatedTable';
 
 const TopPlayers = (props) => {
     const [leaderboard, setLeaderboard] = useState([]);
@@ -13,6 +14,9 @@ const TopPlayers = (props) => {
     return (
         <Container>
             <h1>Top Players</h1>
+            <Row>
+                <PaginatedTable/>
+            </Row>
             <Row>
                 <Col>
                     {

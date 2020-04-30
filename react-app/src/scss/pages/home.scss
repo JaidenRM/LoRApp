@@ -11,6 +11,10 @@
             background-color: $primary-col;
             margin: 0;
         }
+
+        .striked {
+            text-decoration: line-through;
+        }
     }
 
     .section-first {

@@ -53,3 +53,22 @@ export const CreateLayoutWithObjects = (objCol, numOfCols, component, componentP
 
     return rows;
 }
+
+export function SortCard(card1, card2) {
+    if(card1["region"] < card2["region"])
+        return -1;    
+    if(card1["region"] > card2["region"])
+        return 1;
+
+    if(Number(card1["cost"]) < Number(card2["cost"]))
+        return -1;
+    if(Number(card1["cost"]) > Number(card2["cost"]))
+        return 1;
+
+    if(card1["name"] < card2["name"])
+        return -1;
+    if(card1["name"] > card2["name"])
+        return 1;
+
+    return 0;
+}

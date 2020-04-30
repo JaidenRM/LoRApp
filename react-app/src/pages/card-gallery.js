@@ -21,13 +21,12 @@ const CardGallery = (props) => {
 
             let collectible = {};
             let nonCollectible = {};
-            let keys = Object.keys(json);
-
-            keys.forEach((key) => {
-                if (json[key]["collectible"])
-                    collectible[key] = json[key];
+            
+            json.forEach((card) => {
+                if (card["collectible"])
+                    collectible[card["cardCode"]] = card;
                 else
-                    nonCollectible[key] = json[key];
+                    nonCollectible[card["cardCode"]] = card;
             });
 
             setCards(collectible);

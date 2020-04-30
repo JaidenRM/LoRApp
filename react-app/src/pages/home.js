@@ -80,7 +80,7 @@ const Home = (props) => {
                             Encoding of decks is not in order for factions/regions at
                             a specific mana cost
                         </li>
-                        <li>
+                        <li className="striked">
                             Card filter is only filtering on one filter, also some filters 
                             appear not to be working correctly
                         </li>
@@ -117,7 +117,7 @@ const Home = (props) => {
                             Tidy up the top players to include in a table with 
                             pagination and perhaps some search/filter
                         </li>
-                        <li>
+                        <li className="striked">
                             When loading the cards, they are not in an order, 
                             I will update this so they load in order according 
                             to the following chain. Faction -> cost -> name.
@@ -125,6 +125,9 @@ const Home = (props) => {
                         <li>
                             Add more animations/transitions to make the website 
                             look better, i.e.: slow load cards as you scroll.
+                        </li>
+                        <li>
+                            Add the new expansion!!
                         </li>
                     </ul>
                 </Col>

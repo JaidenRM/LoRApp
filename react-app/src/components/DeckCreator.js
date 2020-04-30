@@ -30,6 +30,7 @@ const DeckCreator = (props) => {
 
         setDeckCode(json.code);
     }
+
     const ModalBodyText = 
             <Container>
                 <Row>
@@ -62,67 +63,75 @@ const DeckCreator = (props) => {
 
         return ""
     }   
+
+    const DeckName = () =>
+        <Row className="deck-creator__deck_name">
+            <InputGroup>
+                <InputGroupAddon addonType="prepend">
+                    <InputGroupText>
+                        <img src={EditIcon} className="deck-creator__deck_name__icon"/>
+                    </InputGroupText>
+                </InputGroupAddon>
+                <Input placeholder="My new deck name..." className="deck-creator__deck_name__input"/>
+            </InputGroup>
+        </Row>
+    const DeckStats = () =>
+        <Row className="deck-creator__deck_stats">
+            <Col xs={6} sm={3}>
+                <Label for="lbl_spells_count">Spells:</Label>
+                <span id="lbl_spells_count">{deckProps["spells"]}</span>
+            </Col>
+            <Col xs={6} sm={3}>
+                <Label for="lbl_followers_count">Followers:</Label>
+                <span id="lbl_followers_count">{deckProps["followers"]}</span>
+            </Col>
+            <Col xs={6} sm={3}>
+                <Label for="lbl_champions_count">Champions:</Label>
+                <span id="lbl_champions_count">{deckProps["champions"]}/{Constants.MAX_CHAMPS}</span>
+            </Col>
+            <Col xs={6} sm={3}>
+                <Label for="lbl_total_count">Total:</Label>
+                <span id="lbl_total_count">{deckProps["total"]}/{Constants.MAX_CARDS}</span>
+            </Col>
+            <Col xs={12}>
+                {props.barChart}
+            </Col>
+        </Row>
+    const DeckCards = () =>
+        <Row className="deck-creator__cards">
+            <ul>
+                {Object.keys(decklist).sort(SortCards).map(code => {
+                    let key = decklist[code]["index"];
+                    //console.log(decklist);
+                    return(
+                        <li>
+                            <Button onClick={() => RemoveFromDeck(code)}>
+                                {deck[key]["cost"]}: {deck[key]["name"]} x{decklist[code]["total"]}
+                            </Button>
+                        </li>
+                    )
+                })}
+            </ul>
+        </Row>
+    const DeckSave = () =>
+        <Row className="deck-creator__save_btn">
+            <Button onClick={CreateDeck}>Save</Button>
+            <DeckCodeModal/>
+        </Row>
     
     useEffect(() => {
         setDeck(props.deck);
         let parsedDecks = ParseDeck();
         setDeckProps(parsedDecks["props"]);
         setDecklist(parsedDecks["codes"]);
-        console.log(parsedDecks["codes"]);
     }, [props.deck]);
 
     return (
         <Container className="deck-creator">
-            <Row className="deck-creator__deck_name">
-                <InputGroup>
-                    <InputGroupAddon addonType="prepend">
-                        <InputGroupText>
-                            <img src={EditIcon} className="deck-creator__deck_name__icon"/>
-                        </InputGroupText>
-                    </InputGroupAddon>
-                    <Input placeholder="My new deck name..." className="deck-creator__deck_name__input"/>
-                </InputGroup>
-            </Row>
-            <Row className="deck-creator__deck_stats">
-                <Col xs={6} sm={3}>
-                    <Label for="lbl_spells_count">Spells:</Label>
-                    <span id="lbl_spells_count">{deckProps["spells"]}</span>
-                </Col>
-                <Col xs={6} sm={3}>
-                    <Label for="lbl_followers_count">Followers:</Label>
-                    <span id="lbl_followers_count">{deckProps["followers"]}</span>
-                </Col>
-                <Col xs={6} sm={3}>
-                    <Label for="lbl_champions_count">Champions:</Label>
-                    <span id="lbl_champions_count">{deckProps["champions"]}/{Constants.MAX_CHAMPS}</span>
-                </Col>
-                <Col xs={6} sm={3}>
-                    <Label for="lbl_total_count">Total:</Label>
-                    <span id="lbl_total_count">{deckProps["total"]}/{Constants.MAX_CARDS}</span>
-                </Col>
-                <Col xs={12}>
-                    {props.barChart}
-                </Col>
-            </Row>
-            <Row className="deck-creator__cards">
-                <ul>
-                    {Object.keys(decklist).sort(SortCards).map(code => {
-                        let key = decklist[code]["index"];
-                        //console.log(decklist);
-                        return(
-                            <li>
-                                <Button onClick={() => RemoveFromDeck(code)}>
-                                    {deck[key]["cost"]}: {deck[key]["name"]} x{decklist[code]["total"]}
-                                </Button>
-                            </li>
-                        )
-                    })}
-                </ul>
-            </Row>
-            <Row className="deck-creator__save_btn">
-                <Button onClick={CreateDeck}>Save</Button>
-                <DeckCodeModal/>
-            </Row>
+            {/* <DeckName /> //cant see anything on this in the docs */}
+            <DeckStats />
+            <DeckCards />
+            <DeckSave />
         </Container>
     )
 
