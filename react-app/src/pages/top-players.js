@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'reactstrap';
-import PaginatedTable from '../components/PaginatedTable';
+import PaginatedTable from '../components/PaginatedTable.tsx';
 
 const TopPlayers = (props) => {
     const [leaderboard, setLeaderboard] = useState([]);
 
     useEffect(() => {
-        fetch('/api/riotLoR/leaderboards')
+        try {
+            fetch('/api/riotLoR/leaderboards')
             .then(res => res.json())
             .then(data => setLeaderboard(data.players));
+        } catch(e) {
+            console.log(e);
+        }
     }, []);
     
     return (
