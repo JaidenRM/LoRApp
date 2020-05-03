@@ -1,13 +1,13 @@
-import React, { useState, FunctionComponent } from 'react'
+import React, { useState, useEffect, FunctionComponent } from 'react'
 import {
     Pagination, PaginationItem, PaginationLink
-    , Table
+    , Table, Container, Row, Col, Input
 } from 'reactstrap'
 
 interface PT {
-    colNames: string[];
     tableData: string[][];
     visibleRows: number;
+    visibleRowsOpts: number[];
 }
 
 interface PC {
@@ -18,7 +18,6 @@ interface PC {
 }
 
 interface TC {
-    colNames: string[];
     rows: string[][];
     currPage: number;
     visibleRows: number;
@@ -26,41 +25,78 @@ interface TC {
 
 const PaginatedTable: FunctionComponent<PT> = props => {
     const [currPage, setCurrPage] = useState(1);
+    const [filter, setFilter] = useState("");
+    const [data, setData] = useState(props.tableData);
+    const [showRows, setShowRows] = useState(props.visibleRows);
+
+    useEffect(() => {
+        let rows = props.tableData;
+        let tmpRows = [];
+
+        if(filter) {
+            rows.map(obj => {
+                if(Object.values(obj).some(txt => String(txt).toUpperCase().includes(filter.toUpperCase())))
+                    tmpRows.push(obj);
+            });
+            rows = tmpRows;
+        }
+        setData(rows);
+        
+    }, [filter, props.tableData]);
 
     const HandlePageClick = num => setCurrPage(num);
-    let totRows = Object.keys(props.tableData).length;
+    const HandleFilter = val => setFilter(val);
+
+    let totRows = data.length;
     
     return (
-        <div>
-            <TableComp 
-                colNames={props.colNames} 
-                rows={props.tableData}
-                visibleRows={props.visibleRows}
-                currPage={currPage} />
-            <PaginationComp 
-                totalRows={totRows} 
-                visibleRows={props.visibleRows}
-                currPage={currPage}
-                handleClick={HandlePageClick}/>
-        </div>
+        <Container>
+            <Row>
+                <Col xs={8}>
+                    <Input 
+                        placeholder="Filter..." 
+                        type="text"
+                        onChange={e => HandleFilter(e.target.value)}/>
+                </Col>
+                <Col xs={4}>
+                    <select onChange={e => setShowRows(Number(e.target.value))} className="form-control">
+                        {props.visibleRowsOpts.map(opt => <option value={opt} selected={opt == showRows}>{opt}</option>)}
+                    </select>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <TableComp 
+                        rows={data}
+                        visibleRows={showRows}
+                        currPage={currPage} />
+                    <PaginationComp 
+                        totalRows={totRows} 
+                        visibleRows={showRows}
+                        currPage={currPage}
+                        handleClick={HandlePageClick}/>
+                </Col>
+            </Row>
+        </Container>
     )
 }
 
 const TableComp: FunctionComponent<TC> = props => {
-
+    let showRows = CreateRange((props.currPage - 1) * props.visibleRows, (props.currPage * props.visibleRows) - 1)
+    console.log(props.rows);
     return (
         <Table>
             <thead>
                 <tr>
-                    {props.colNames.map(cn => <th>{cn}</th>)}
+                    {props.rows.length > 0 ? Object.keys(props.rows[0]).map(k => <th>{k}</th>) : ""}
                 </tr>
             </thead>
             <tbody>
                 {props.rows.map((row, ind) => {
-                    if(props.currPage == ind + 1)
+                    if(showRows.includes(ind))
                         return(
                             <tr>
-                                {row.map(val => <td>{val}</td>)}
+                                {Object.keys(row).map(k => <td>{row[k]}</td>)}
                             </tr>
                         )
                 })}
@@ -76,7 +112,6 @@ const PaginationComp: FunctionComponent<PC> = props => {
         e.preventDefault();
         props.handleClick(i);
     }
-    console.log(pages);
 
     return (
         <Pagination aria-label="PaginatedTable pagination bar">
@@ -114,10 +149,10 @@ function CreateRange(start, end) {
 }
 
 PaginatedTable.defaultProps = {
-    colNames: ["col1", "col2"],
     tableData: [["a1", "a2"], ["b1", "b2"], ["c1", "c2"]
     , ["d1", "d2"], ["e1", "e2"], ["f1", "f2"]],
-    visibleRows: 2
+    visibleRows: 10,
+    visibleRowsOpts: [5, 10, 25, 50, 100]
 }
 
 export default PaginatedTable;

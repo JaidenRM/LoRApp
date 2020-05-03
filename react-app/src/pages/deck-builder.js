@@ -93,7 +93,7 @@ const DeckBuilder = (props) => {
                                 className={cards[key]["isFiltered"] ? "hidden" : "show"}
                             >
                                 <Card 
-                                    imgUrl={cards[key]["assets"][0]["gameAbsolutePath"]}
+                                    gameImgUrl={cards[key]["assets"][0]["gameAbsolutePath"]}
                                     className="card-gallery__cards_card"
                                     cardCode={cards[key]["cardCode"]}
                                     onClick={AddToDeck}

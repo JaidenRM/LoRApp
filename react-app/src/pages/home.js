@@ -8,7 +8,7 @@ import ScrollTo from '../components/ScrollTo';
 import { TwitterTimelineEmbed } from 'react-twitter-embed';
 
 
-const Home = (props) => {
+const Home = props => {
     const LoRTwitter = () => {
         return (
             <Row>
@@ -23,6 +23,11 @@ const Home = (props) => {
         
     const intro = 
         <Jumbotron>
+            <Row>
+                <Heading
+                    text="WELCOME"
+                    className="heading-welcome"/>
+            </Row>
             <Row>
                 <Col>
                     Welcome to the site. I made this as a little project as I've been
@@ -54,9 +59,9 @@ const Home = (props) => {
     const issues =
         <Jumbotron>
             <Row>
-                <Col>
-                    <h2>Known Issues</h2>
-                </Col>
+                <Heading
+                    text="KNOWN ISSUES"
+                    className="heading-known-issues"/>
             </Row>
             <Row>
                 <Col>
@@ -95,6 +100,11 @@ const Home = (props) => {
     const todo =
         <Jumbotron>
             <Row>
+                <Heading
+                    text="UPCOMING CHANGES"
+                    className="heading-to-do"/>
+            </Row>
+            <Row>
                 <Col>
                     In this section I am going to be laying out the 
                     upcoming list of features/improvements being added 
@@ -113,7 +123,7 @@ const Home = (props) => {
                             On click of card, show associated cards and small 
                             details like flavour
                         </li>
-                        <li>
+                        <li className="striked">
                             Tidy up the top players to include in a table with 
                             pagination and perhaps some search/filter
                         </li>
@@ -182,7 +192,7 @@ const Home = (props) => {
                     </Row>
                 </Jumbotron>
             </section>
-            <ScrollTo scrollTo="section-second"></ScrollTo>
+            <ScrollTo scrollTo="section-second"/>
             <section className="section-second">
                 {latestNews}
             </section>

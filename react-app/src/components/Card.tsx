@@ -9,7 +9,8 @@ interface CardProps {
     description: string;
     region: string;
     keywords: string[];
-    imgUrl: string;
+    gameImgUrl: string;
+    fullImgUrl: string;
     className: string;
     onClick(cardCode:string, isAdd?: boolean): void;
 }
@@ -17,7 +18,7 @@ interface CardProps {
 const Card = (props : CardProps) => {
     const GetCardCode = () => props.onClick(props.cardCode);
 
-    return <img className={props.className} src={props.imgUrl} onClick={GetCardCode} />
+    return <img className={props.className} src={props.gameImgUrl} onClick={GetCardCode} />
 }
 
 

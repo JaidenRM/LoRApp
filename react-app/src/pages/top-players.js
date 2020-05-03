@@ -6,37 +6,29 @@ const TopPlayers = (props) => {
     const [leaderboard, setLeaderboard] = useState([]);
 
     useEffect(() => {
+        fetchLeaderboard();
+    }, []);
+    
+    const fetchLeaderboard = async () => {
         try {
-            fetch('/api/riotLoR/leaderboards')
-            .then(res => res.json())
-            .then(data => setLeaderboard(data.players));
+            const res = await fetch('/api/riotLoR/leaderboards');
+            const json = await res.json();
+            //console.log(json);
+
+            setLeaderboard(json.players);
         } catch(e) {
             console.log(e);
         }
-    }, []);
-    
+    }
+
     return (
         <Container>
             <h1>Top Players</h1>
             <Row>
-                <PaginatedTable/>
-            </Row>
-            <Row>
                 <Col>
-                    {
-                        leaderboard.map((playerObj) => {
-                            return (
-                                <Row>
-                                    <Col>
-                                        {playerObj.name}
-                                    </Col>
-                                    <Col>
-                                        {playerObj.rank}
-                                    </Col>
-                                </Row>
-                            );
-                        })
-                    }
+                    <PaginatedTable 
+                        tableData={leaderboard}
+                        visibleRows={10} />
                 </Col>
             </Row>
         </Container>

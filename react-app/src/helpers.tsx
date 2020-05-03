@@ -72,3 +72,24 @@ export function SortCard(card1, card2) {
 
     return 0;
 }
+
+function GenerateCarouselItem(card) {
+    return {
+        src: card["assets"][0]["fullAbsolutePath"],
+        altText: "Flavour",
+        caption: card["flavorText"]
+    }
+}
+
+export function GenerateCarouselItems(cards, cardCode) {
+    let card = cards[cardCode];
+    let items = [];
+
+    if(card) items.push(GenerateCarouselItem(card));
+    card["associatedCardRefs"].map(cc => {
+        let assCard = cards[cc];
+        if(assCard) items.push(GenerateCarouselItem(assCard));
+    })
+
+    return items;
+}
