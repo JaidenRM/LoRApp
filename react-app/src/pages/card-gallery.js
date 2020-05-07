@@ -3,8 +3,8 @@ import { Container, Row, Col } from 'reactstrap';
 import Card from '../components/Card.tsx';
 import FilterCards from '../components/FilterCards';
 import Sidebar from '../components/Sidebar';
-import MyCarousel from '../components/MyCarousel.tsx';
-import { GenerateCarouselItems } from '../helpers.tsx';
+import CardStats from '../components/CardStats.tsx';
+import { GenerateCardStats } from '../helpers.tsx';
 
 const CardGallery = (props) => {
     const [cards, setCards] = useState({});
@@ -44,7 +44,7 @@ const CardGallery = (props) => {
         <Container fluid className="card-gallery">
             <Sidebar>
                 <FilterCards cards={cards} setCards={setCardsDict} />
-                <MyCarousel items={GenerateCarouselItems({...cards, ...nonCollectible}, currCard)}/>
+                <CardStats cards={GenerateCardStats({...cards, ...nonCollectible}, currCard)}/>
             </Sidebar>
             <Row className="card-gallery__title">
                 <h1>Card Gallery</h1>

@@ -95,3 +95,45 @@ export function GenerateCarouselItems(cards, cardCode) {
 
     return items;
 }
+
+function GenerateCardStat(card: Card) {
+    let cs:CardInfo = {
+        name: null,
+        fullImg: null,
+        artist: null,
+        flavour: null,
+        cost: NaN,
+        attack: NaN,
+        health: NaN,
+        type: null,
+        rarity: null
+    };
+
+    if(card) {
+        cs.name = card.name;
+        cs.fullImg = card.assets[0].fullAbsolutePath;
+        cs.artist = card.artistName;
+        cs.flavour = card.flavorText;
+        cs.cost = card.cost;
+        cs.attack = card.attack;
+        cs.health = card.health;
+        cs.type = card.type;
+        cs.rarity = card.rarity;
+    }
+
+    return cs;
+}
+
+export function GenerateCardStats(cards:Record<string, Card>, cardCode:string) {
+    let cDict:CardInfo[] = [];
+    let card:Card = cards[cardCode];
+
+    cDict.push(GenerateCardStat(card));
+    
+    if(!cards || !cardCode) return cDict;
+    card.associatedCardRefs.map(code => 
+        cDict.push(GenerateCardStat(cards[code]))
+    );
+
+    return cDict;
+}

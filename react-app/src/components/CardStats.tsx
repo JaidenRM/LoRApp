@@ -7,40 +7,56 @@ import {
     Base show a dropdown of current and assoc. cards?
     Show card info below
 */
-type CardInfo = {
-    name: string
-    fullImg: string,
-    artist: string,
-    flavour: string,
-    cost: number,
-    attack: number,
-    health: number,
-    type: string,
-    rarity: string
-}
+
 
 interface CS {
     cards: CardInfo[]
 }
 
 const CardStats: FunctionComponent<CS> = props => {
+    const [ddlInd, setDDLIndex] = useState(0);
 
+    const HandleDDLChange = val => {
+        let ind = Number(val);
+
+        if(Number.isNaN(ind))
+            ind = 0;
+        
+        setDDLIndex(ind);
+    }
+    //ERROR: when clicking on new card and not on index 0 it crashes
     return (
-        <Container>
-            <Row>
+        <Container className="card-stats">
+            <Row className="card-stats__ddl">
                 <Col>
-                    <select>
+                    <select onChange={e => HandleDDLChange(e.target.value)}>
                         {props.cards.map((c, i) => <option value={i}>{c.name}</option>)}
                     </select>
                 </Col>
             </Row>
-            <Row>
-                {Object.keys(props.cards[0]).map(key => {
-                    <Col>{key}: {props.cards[0][key]}</Col>
-                })}
-            </Row>
+            
+                {Object.keys(props.cards[ddlInd]).map(key =>
+                    <Row className={`card-stats__info_${key}`}>
+                        <Col xs="auto">{key}: {props.cards[ddlInd][key]}</Col>
+                    </Row>
+                )}
+            
         </Container>
     )
+}
+
+CardStats.defaultProps = {
+    cards: [{
+        name: null,
+        fullImg: null,
+        artist: null,
+        flavour: null,
+        cost: NaN,
+        attack: NaN,
+        health: NaN,
+        type: null,
+        rarity: null
+    }]
 }
 
 export default CardStats;
