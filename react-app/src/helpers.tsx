@@ -82,6 +82,8 @@ function GenerateCarouselItem(card) {
 }
 
 export function GenerateCarouselItems(cards, cardCode) {
+    if(!cards || !cardCode) return [];
+    
     let card = cards[cardCode];
     let items = [];
 

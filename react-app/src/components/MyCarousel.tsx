@@ -53,11 +53,11 @@ const MyCarousel = props => {
     });
 
     return (
-        <Container>
-            <Row>
+        <Container className="my-carousel">
+            <Row className="my-carousel__toggle">
                 <Button onClick={Toggle}>View</Button>
             </Row>
-            <Row style={{display: displayStatus}}>
+            <Row style={{display: displayStatus, position: "fixed"}} className="my-carousel__carousel">
                 <Carousel
                 activeIndex={activeIndex}
                 next={next}
@@ -73,7 +73,7 @@ const MyCarousel = props => {
 }
 
 MyCarousel.defaultProps = {
-    items: []
+    items: [],
 }
 
 export default MyCarousel;
