@@ -7,6 +7,10 @@ body {
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    a, a:hover {
+      color: $tertiary-col;
+    }
 }
   
 code {

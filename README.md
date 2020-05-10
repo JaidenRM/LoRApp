@@ -42,9 +42,7 @@ Pre-reqs (I believe):
 
 1. Encoded deck is a bit out of order alphabetically in final grouped list
 2. Filter only filters one thing at a time
-3. Cards, should display numerically -> alphabetically (cost -> name) order
-4. Chuck underconstruction pic in jumbotron
-5. Stuff I missed XD...
+3. Stuff I missed XD...
 
 ============================
 *	To-Do List	   *
@@ -54,8 +52,9 @@ Pre-reqs (I believe):
 1. Update home
 2. On card click show associated cards in lightbox or something
 3. Chuck challengers into a table with pagination
-4. About page?
-5. Animations/load card images with delay based on scroll
+4. Cards, should display numerically -> alphabetically (cost -> name) order
+5. About page?
+6. Animations/load card images with delay based on scroll
 
 ============================
 * 	Rough Design       *

@@ -20,10 +20,11 @@ const MyModal: FunctionComponent<ModalProps> = props => {
     const toggle = () => setOpen(prev => !prev);
 
     return (
-        <Container className={`my-modal_wrapper ${props.className}`}>
+        <Container className="my-modal_wrapper">
             <Row>
                 <Button onClick={toggle} className="my-modal_open-btn">{props.openModalText}</Button>
-                <Modal isOpen={open} toggle={toggle} className="my-modal">
+                <Modal isOpen={open} toggle={toggle} className={`my-modal ${props.className}`} 
+                    autoFocus={true}>
                     <ModalHeader toggle={toggle} className="my-modal__header">
                         {props.modalTitle}
                     </ModalHeader>

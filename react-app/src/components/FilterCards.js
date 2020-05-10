@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { 
     Container, Row, Col, 
-    //Dropdown, DropdownToggle, DropdownMenu, DropdownItem,
     Button, Input
 } from 'reactstrap';
 import ActiveButton from './ActiveButton';
@@ -19,7 +18,7 @@ const FilterCards = (props) => {
     const setCards = (c) => props.setCards(c);
 
     const UpdateFilter = (type, amount, isAdd) => {
-
+        
         if(isAdd) {
             if(type in filter)
                 filter[type].push(amount);
@@ -30,9 +29,8 @@ const FilterCards = (props) => {
             filter[type].splice(filter[type].indexOf(amount), 1);
             //remove type from dict if it is empty
             if(filter[type].length == 0)
-                delete filter[type];    
+                delete filter[type];
         }
-
         setFilter(filter);
         UpdateCards(props.cards);
     }
@@ -51,27 +49,51 @@ const FilterCards = (props) => {
         
         setFilter(filter);
         UpdateCards(props.cards);
+        console.log(filter);
     }
 
     const UpdateCards = (cardDict) => {
         let newDict = {...cardDict};
         Object.keys(newDict).map((cardCode) => {
             let isShow = true;
-            
+            //AND
             Object.keys(filter).map((type) => {
-                filter[type].forEach(f => {
-                    let inArray = Array.isArray(newDict[cardCode][type]) 
-                                    && newDict[cardCode][type].includes(f);
-                    let higherThanSeven = f == "7+" && Number(newDict[cardCode][type]) >= Number(f);
-                    let equalString = newDict[cardCode][type] == f;
-                    
-                    if(inArray || higherThanSeven || equalString) {
-                            isShow = true;
-                            return;
-                    }
-                    else
+                //OR
+                if(["region", "rarity"].includes(type)) {
+                    if(!filter[type].includes(newDict[cardCode][type]))
                         isShow = false;
-                })
+                }
+                //OR
+                else if(["cost", "health", "attack"].includes(type)) {
+                    if(Number(newDict[cardCode][type]) >= 7) {
+                        if(!filter[type].includes("7+"))
+                            isShow = false;
+                    } else {
+                        if(!filter[type].includes(String(newDict[cardCode][type])))
+                            isShow = false;
+                    }
+                }
+                //OR
+                else if(["type"].includes(type)) {
+                    let jType = newDict[cardCode][type]; //json type
+                    if((jType == "Spell" && !filter[type].includes("Spell"))
+                        || (jType == "Unit" && newDict[cardCode]["supertype"] != "Champion" && !filter[type].includes("Follower"))
+                        || (jType == "Unit" && newDict[cardCode]["supertype"] == "Champion" && !filter[type].includes("Champion")))
+                            isShow = false;
+                }
+                //AND
+                else if(["keywords"].includes(type)) {
+                    if(!filter[type].every(t => {
+                            let inKeyword = Array.isArray(newDict[cardCode][type])
+                                            && newDict[cardCode][type].includes(t);
+                            let inDescLink = newDict[cardCode]["description"].includes("vocab." + t)
+                                            || newDict[cardCode]["description"].includes("keyword." + t);
+                            
+                            return inKeyword || inDescLink;
+                        })
+                    )
+                        isShow = false;
+                }
             })
 
             newDict[cardCode]["isFiltered"] = !isShow;
@@ -88,7 +110,7 @@ const FilterCards = (props) => {
             const resp = await fetch('api/cards/globals');
             const json = await resp.json();
         
-            setKeywords(json["keywords"]);
+            setKeywords(json["keywords"].filter(jKey => jKey.description != " "));
             setRegions(json["regions"]);
             setRarities(json["rarities"]);
         } catch(error) {
@@ -104,9 +126,6 @@ const FilterCards = (props) => {
                         <Col className="filter__header_title">
                             <h1>Filters</h1>
                         </Col>
-                        {/* <Col xs="auto" className="filter__header_close" onClick={toggleOpen}>
-                            &times;
-                        </Col> */}
                     </Row>
                     <Regions regions={regions} filter={UpdateFilter} />
                     <Costs filter={UpdateFilter} />
@@ -233,7 +252,7 @@ const Rarities = (props) => {
                     {Object.keys(props.rarities).map((rarity) => {
                         return(
                             <Col xs={4}>
-                                <ActiveButton type="rarity" val={rarity} onClick={Filter}>
+                                <ActiveButton type="rarity" val={props.rarities[rarity]["name"]} onClick={Filter}>
                                     {membersToCall.map((member) => props.rarities[rarity][member])}
                                 </ActiveButton>
                             </Col>
@@ -261,6 +280,7 @@ const Keywords = (props) => {
 
         props.filter(kwordsList);
     }
+
     const toggle = () => setDropdownOpen(prevState => !prevState);
     const selectMe = (text) => setSelected(text);
 

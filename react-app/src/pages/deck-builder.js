@@ -60,13 +60,12 @@ const DeckBuilder = (props) => {
 
             let collectible = {};
             let nonCollectible = {};
-            let keys = Object.keys(json);
 
-            keys.forEach((key) => {
-                if (json[key]["collectible"])
-                    collectible[key] = json[key];
+            json.forEach((card) => {
+                if (card["collectible"])
+                    collectible[card["cardCode"]] = card;
                 else
-                    nonCollectible[key] = json[key];
+                    nonCollectible[card["cardCode"]] = card;
             });
 
             setCards(collectible);
@@ -94,11 +93,11 @@ const DeckBuilder = (props) => {
                                 className={cards[key]["isFiltered"] ? "hidden" : "show"}
                             >
                                 <Card 
-                                    imgUrl={cards[key]["assets"][0]["gameAbsolutePath"]}
+                                    gameImgUrl={cards[key]["assets"][0]["gameAbsolutePath"]}
                                     className="card-gallery__cards_card"
                                     cardCode={cards[key]["cardCode"]}
                                     onClick={AddToDeck}
-                                ></Card>
+                                />
                             </Col>
                         )
                     })     

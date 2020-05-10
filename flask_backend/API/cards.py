@@ -24,12 +24,15 @@ def get_globals():
 
 @cards.route('/all')
 def get_cards_all():
-    cards = {}
+    #cards = collections.OrderedDict()
+    cards_reader.jsonSet1.sort(key = lambda c: (c["region"], c["cost"], c["name"]))
     for card in cards_reader.jsonSet1:
         card["isFiltered"] = False
-        cards[card["cardCode"]] = card
+        #cards[card["cardCode"]] = card
 
-    return jsonify(cards)
+    resp = jsonify([card for card in cards_reader.jsonSet1]) #ruins order???
+    return resp
+
     
 '''
 ===============================

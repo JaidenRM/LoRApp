@@ -1,34 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'reactstrap';
+import PaginatedTable from '../components/PaginatedTable.tsx';
 
 const TopPlayers = (props) => {
     const [leaderboard, setLeaderboard] = useState([]);
 
     useEffect(() => {
-        fetch('/api/riotLoR/leaderboards')
-            .then(res => res.json())
-            .then(data => setLeaderboard(data.players));
+        fetchLeaderboard();
     }, []);
     
+    const fetchLeaderboard = async () => {
+        try {
+            const res = await fetch('/api/riotLoR/leaderboards');
+            const json = await res.json();
+            //console.log(json);
+
+            setLeaderboard(json.players);
+        } catch(e) {
+            console.log(e);
+        }
+    }
+
     return (
         <Container>
             <h1>Top Players</h1>
             <Row>
                 <Col>
-                    {
-                        leaderboard.map((playerObj) => {
-                            return (
-                                <Row>
-                                    <Col>
-                                        {playerObj.name}
-                                    </Col>
-                                    <Col>
-                                        {playerObj.rank}
-                                    </Col>
-                                </Row>
-                            );
-                        })
-                    }
+                    <PaginatedTable 
+                        tableData={leaderboard}
+                        visibleRows={10} />
                 </Col>
             </Row>
         </Container>
