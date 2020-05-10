@@ -83,7 +83,7 @@ const PaginatedTable: FunctionComponent<PT> = props => {
 
 const TableComp: FunctionComponent<TC> = props => {
     let showRows = CreateRange((props.currPage - 1) * props.visibleRows, (props.currPage * props.visibleRows) - 1)
-    console.log(props.rows);
+
     return (
         <Table>
             <thead>

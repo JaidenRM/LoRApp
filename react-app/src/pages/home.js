@@ -11,12 +11,14 @@ import { TwitterTimelineEmbed } from 'react-twitter-embed';
 const Home = props => {
     const LoRTwitter = () => {
         return (
-            <Row>
-                <TwitterTimelineEmbed
-                    sourceType="profile"
-                    screenName="PlayRuneterra"
-                    options={{height: "60vh", width: "50vw"}}
-                />
+            <Row className="twitter__row">
+                <Col xs="auto" className="twitter__col">
+                    <TwitterTimelineEmbed
+                        sourceType="profile"
+                        screenName="PlayRuneterra"
+                        options={{height: "60vh", width: "70vw", maxWidth: "750px"}}
+                    />
+                </Col>
             </Row>
         )
     }
@@ -41,17 +43,6 @@ const Home = props => {
                 <Col>
                     This gave me the inspiration to come up with a project for learning
                     ReactJS, hence this website. I hope you enjoy it.
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-                    ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-                    in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
                 </Col>
             </Row>
         </Jumbotron>
@@ -119,7 +110,7 @@ const Home = props => {
             <Row>
                 <Col>
                     <ul>
-                        <li>
+                        <li className="striked">
                             On click of card, show associated cards and small 
                             details like flavour
                         </li>
@@ -145,7 +136,7 @@ const Home = props => {
         </Jumbotron>
     
     const latestNews =
-        <Jumbotron>
+        <Jumbotron className="section__latest-news">
             <Row>
                 <Heading 
                     text="NEW EXPANSION AND RELEASE"
@@ -169,11 +160,7 @@ const Home = props => {
                     this.
                 </Col>
             </Row>
-            <Row>
-                <Col>
-                    <LoRTwitter/>
-                </Col>
-            </Row>
+            <LoRTwitter/>
         </Jumbotron>
 
     return (

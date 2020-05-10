@@ -137,3 +137,10 @@ export function GenerateCardStats(cards:Record<string, Card>, cardCode:string) {
 
     return cDict;
 }
+
+export function FirstUpper(str: string) {
+    if(!str) return str;
+
+    if(str.length == 1) return str.toUpperCase();
+    else return str[0].toUpperCase() + str.slice(1).toLowerCase();
+}

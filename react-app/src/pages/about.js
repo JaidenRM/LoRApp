@@ -10,13 +10,13 @@ const About = props => {
     const LinkedIn = () => <a href="https://au.linkedin.com/in/jaiden-muscat-3441981a0">LinkedIn</a>
 
     return(
-        <Container>
-            <Row>
+        <Container className="about">
+            <Row className="about__header">
                 <Heading
                     text="ABOUT"
                     className="heading-about"/>
             </Row>
-            <Row>
+            <Row className="about__body about__body_intro">
                 <Col>
                     This website has been created and designed by myself based 
                     around a card game created by Riot Games. The card game exists 
@@ -24,7 +24,7 @@ const About = props => {
                     The wikipedia page to Legends of Runeterra is linked <LoRWiki/>
                 </Col>
             </Row>
-            <Row>
+            <Row className="about__body about__body_languages">
                 <Col>
                     The website main languages are Javascript for front-end and Python for 
                     back-end. The frameworks used in these languages are Flask for Python and 
@@ -34,7 +34,7 @@ const About = props => {
                     was interested in learning/refreshing on.
                 </Col>
             </Row>
-            <Row>
+            <Row className="about__body about__body_react">
                 <Col>
                     Most of the features you see on the website were created by me through React 
                     components (Filter, Sidebar, Deck encoder etc..) because I wanted learn more 
@@ -45,7 +45,7 @@ const About = props => {
                     API I have integrated.
                 </Col>
             </Row>
-            <Row>
+            <Row className="about__body about__body_new">
                 <Col>
                     I've had a bunch of fun with this project but I am also excited to start a new one 
                     but I will make sure I have a baseline version of this first. I've slowly started 
@@ -55,7 +55,7 @@ const About = props => {
                     project at my GitHub and find me or contact me at the below resources.
                 </Col>
             </Row>
-            <Row>
+            <Row className="about__body about__body_contact-me">
                 <Col>
                     <ul>
                         <li><GitHub/></li>
@@ -65,7 +65,7 @@ const About = props => {
                     </ul>
                 </Col>
             </Row>
-            <Row>
+            <Row className="about__body about__body_end">
                 <Col>
                     Thank you and have a wonderful day :)
                 </Col>

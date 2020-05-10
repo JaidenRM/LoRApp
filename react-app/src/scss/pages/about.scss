@@ -1,0 +1,12 @@
+.about {
+    min-height: calc(100vh - #{$menu-height} - 0.5rem);
+    width: 100%;
+    border: 2px solid $tertiary-col;
+    background-color: $primary-col;
+    margin-bottom: 0.5rem; 
+    padding: 0.5rem;
+
+    .row {
+        margin: 2.5rem 0.25rem;
+    }
+}

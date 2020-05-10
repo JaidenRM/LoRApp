@@ -8,6 +8,16 @@
     overflow-y: scroll;
     height: 100%;
 
+    &__info {
+        label {
+            font-weight: bold;
+        }
+
+        a, a:hover {
+            color: $tertiary-col;
+        }
+    }
+
     &::-webkit-scrollbar {
         border-radius: 10px;
         height: 10px;
