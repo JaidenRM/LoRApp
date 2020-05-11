@@ -1,5 +1,5 @@
 {
-  "homepage": "http://jaidenrm.github.io/LoRApp",
+  "homepage": "/static/react",
   "name": "react-app",
   "version": "0.1.0",
   "private": true,
@@ -71,9 +71,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "test": "node scripts/test.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -147,7 +145,6 @@
   },
   "devDependencies": {
     "@types/react-router-dom": "^5.1.3",
-    "@types/reactstrap": "^8.4.2",
-    "gh-pages": "^2.2.0"
+    "@types/reactstrap": "^8.4.2"
   }
 }
